@@ -25,7 +25,10 @@ end
 require_files 'config/initializers/*.rb'
 require "config/environments/#{RACK_ENV}"
 
-Dir[ File.join RACK_ROOT, 'lib/ext/*.rb' ].each {|e| require e}
+#
+# Core Extensions
+#
+require_files 'lib/ext/*.rb'
 
 #
 # Models
