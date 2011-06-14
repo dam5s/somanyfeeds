@@ -1,0 +1,3 @@
+= partial :feed, locals: {feed: @feed}
+:javascript
+  Manager.flash('notice', '#{flash[:notice]}', '#{@feed.id}');

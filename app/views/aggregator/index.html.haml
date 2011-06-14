@@ -1,0 +1,5 @@
+= partial :article, collection: @articles
+
+- if xhr?
+  :javascript
+    SoManyFeeds.updateSources(#{@sources.to_json});

@@ -1,0 +1,10 @@
+%section{class: "feed new #{feed_type_class feed}", id: feed.id.to_s}
+  %button back
+
+  %form{method: 'POST', action: '/try-it/step-2'}
+    - hidden_field(feed, :_type)
+    %ul
+      %li
+        - text_field(feed, :name)
+      %li
+        - text_field(feed, :info)

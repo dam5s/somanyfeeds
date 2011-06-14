@@ -1,0 +1,39 @@
+%form{action: '/my-account', method: 'POST'}
+  %fieldset.account
+    %legend General
+    %dl
+      %dt
+        - label(user, :name)
+        = errors(user, :name)
+      %dd
+        - text_field(user, :name)
+      %dt
+        - label(user, :site_name)
+        = errors(user, :site_name)
+      %dd
+        - text_field(user, :site_name)
+      %dt
+        - label(user, :domain_name)
+        = errors(user, :domain_name)
+      %dd
+        - text_field(user, :domain_name)
+  %fieldset.account
+    %legend Authentication
+    %dl
+      %dt
+        - label(user, :username)
+        = errors(user, :username)
+      %dd
+        - text_field(user, :username)
+      %dt
+        - label(user, :password)
+        = errors(user, :password)
+      %dd
+        - password_field(user, :password)
+      %dt
+        - label(user, :password_confirmation)
+        = errors(user, :password_confirmation)
+      %dd
+        - password_field(user, :password_confirmation)
+  %input{type: 'submit', value: 'save', class: 'save-account button tk-edita'}
+      

@@ -1,0 +1,34 @@
+gzip_assets: off
+package_path: jam
+
+javascripts:
+  head:
+    - public/js/head.js
+  aggregator:
+    - public/js/jquery-1.4.4.min.js
+    - public/js/aggregator.js
+  jquery:
+    - public/js/jquery-1.4.4.min.js
+  manager_user:
+    - public/js/jquery-1.4.4.min.js
+    - public/js/manager_user.js
+  manager_try_it:
+    - public/js/jquery-1.4.4.min.js
+    - public/js/jquery.tmpl.min.js
+    - public/js/manager_try_it.js
+
+stylesheets:
+  aggregator:
+    - public/css/reset.css
+    - public/css/base.css
+    - public/css/application.css
+    - public/css/aggregator.css
+    - public/css/article.css
+    - public/css/aggregator-mobile.css
+    - public/css/user.css
+  manager:
+    - public/css/reset.css
+    - public/css/base.css
+    - public/css/application.css
+    - public/css/manager.css
+    - public/css/article.css

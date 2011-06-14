@@ -1,0 +1,6 @@
+%ul
+  %li
+    %img#loading{src: '/img/loading-blue.gif'}
+  - @user.feeds.sort_by(&:name).each do |feed|
+    %li
+      - source_link(feed)

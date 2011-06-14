@@ -1,0 +1,46 @@
+article {
+  padding-bottom: 2em;
+}
+
+  article header {
+    color: #fff;
+    position: relative;
+  }
+    article h1 {
+      text-align: left;
+      font-size: 180%;
+      margin: 0 2%;
+    }
+    article header a:link,
+    article header a:active,
+    article header a:visited,
+    article header a:hover {
+      background-color: #326E9C;
+      width: 50%;
+      display: inline-block;
+      padding: .5em 35% .5em 15%;
+      color: #fff;
+    }
+      article header a:hover  { background-color: #A8CB17; }
+      article header a:active { background-color: #A8CB17; }
+
+    article h2 {
+      position: absolute;
+      right: 15%;
+      top: 20%;
+      font-size: 100%;
+      text-align: right;
+      margin: 0 2%;
+    }
+      article h2 time {
+        display: block;
+      }
+
+  article section {
+    padding: 1em 2%;
+    margin: 0 13%;
+    background-color: #eee;
+  }
+    article p, article ul, article object,
+    article a.gist { margin-bottom: 1em; }
+    article a.gist { display: inline-block; }

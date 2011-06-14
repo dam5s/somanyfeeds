@@ -1,0 +1,14 @@
+%form{action: '/login', method: 'POST'}
+
+  %fieldset.login
+    %dl
+      %dt
+        %label{for: 'login'} Username / Email
+      %dd
+        %input{type: 'text', name: 'login', id: 'login'}
+      %dt
+        %label{for: 'password'} Password
+      %dd
+        %input{type: 'password', name: 'password', id: 'password'}
+
+    %input{type: 'submit', value: 'login', class: 'login button tk-edita'}

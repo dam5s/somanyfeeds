@@ -1,0 +1,40 @@
+!!! 5
+%html{lang: 'en'}
+  %head
+    %title So Many Feeds - #{@title}
+    %meta{charset: 'utf-8'}
+    %meta{'http-equiv' => 'X-UA-Compatible', content: 'IE=edge,chrome=1'}
+    - jammit :js, :head
+    - jammit :css, :manager
+    - unless development?
+      %script{src: 'http://use.typekit.com/dtz1quu.js'}
+      %script try{Typekit.load();}catch(e){}
+  %body{class: @namespace || 'home'}
+    %header.main
+      %hgroup.main
+        %h1 So Many Feeds
+        - if no_cache? && logged_in?
+          %h2 Welcome, #{user.to_label}
+        - else
+          %h2 A simple homepage
+      %nav
+        %ul
+          %li.home
+            %a{href: '/'} home
+          %li
+            %a{href: '/my-account'} my account
+          %li
+            %a{href: '/my-feeds'} my feeds
+          %li
+            %a{href: '/my-site'} my site
+          - if no_cache? && logged_in?
+            %li
+              %a{href: '/logout'} logout
+      %hgroup.page
+        %h1
+          = @title
+          %ul#flash= flash_messages
+    %section.main
+      = yield
+    - package = @namespace ? "manager_#{@namespace}".to_sym : :jquery
+    - jammit :js, package, async: true

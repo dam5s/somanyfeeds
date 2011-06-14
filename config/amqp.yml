@@ -1,0 +1,15 @@
+:topic: jobs
+:consumers:
+  - :name: High Priority Jobs
+    :key: jobs.high
+    :workers: 2
+  - :name: Medium Priority Jobs
+    :key: jobs.medium
+  - :name: Low Priority Jobs
+    :key: jobs.low
+
+:server:
+  :user: guest
+  :password: guest
+  :host: localhost
+  :logging: true

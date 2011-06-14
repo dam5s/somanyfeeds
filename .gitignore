@@ -1,0 +1,8 @@
+*.swp
+*.swo
+db_backups
+.rake_tasks
+.DS_Store
+config/deploy.rb
+config/unicorn.rb
+db_backups

@@ -1,0 +1,17 @@
+%ol#steps
+  %li.current step 1
+  %li step 2
+  %li step 3
+  %li save!
+
+%section.step.step-1
+
+  %form{ method: 'POST', action: '/try-it/step-1' }
+
+    %dl
+      %dt
+        - label visitor, :feed_name, 'Name your site'
+      %dd
+        - text_field visitor, :site_name
+
+    %input.button{type: 'submit', value: 'continue to step 2'}

@@ -1,0 +1,9 @@
+!!! XML
+%rss{version: '2.0'}
+  %channel
+    %title= @title
+    %description So many fucking feeds in one place!
+    %link http://dam5s.net
+    %lastBuildDate= Time.now.httpdate
+    %pubDate= Time.now.httpdate
+    = yield

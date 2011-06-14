@@ -1,0 +1,10 @@
+%item
+  %title
+    :cdata
+      #{article.title}
+  %description
+    :cdata
+      #{article.description}
+  %link= article.link
+  %guid{isPermalink: 'false'}= article.entry_id
+  %pubDate= article.date.httpdate

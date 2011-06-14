@@ -1,0 +1,13 @@
+%ol#steps
+  %li.done
+    %a{ href: '/try-it/step-1' } step 1
+  %li.current step 2
+  %li step 3
+  %li save!
+
+%section.step.step-2
+
+  = partial :feed_types
+  = partial :try_feed, collection: @feeds, as: 'feed'
+
+  %input.button{type: 'submit', value: 'continue to step 3'}

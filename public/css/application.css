@@ -1,0 +1,81 @@
+/*
+ * COLORS
+ * 2- Darker Blue : #2A4C66
+ * 1- Dark Blue: #40627C
+ * 3- Light Blue: #326E9C
+ * 4- Green: #A8CB17
+ */
+body {
+  font-family: "Trebuchet MS", sans-serif;
+  color: #444;
+  background-color: #fff;
+  font-size: 110%;
+}
+::-moz-selection{ background: #A8CB17; }
+::selection { background:#A8CB17; }
+
+a:link,
+a:active,
+a:visited,
+a:hover {
+  color: #326E9C;
+  text-decoration: none;
+}
+  a:active,
+  a:hover {
+    color: #A8CB17;
+  }
+
+h1,h2 { font-size: 300%; text-align: center; }
+h2    { font-size: 180%; }
+
+
+.rounded,
+fieldset,
+section.feed,
+.button,
+article header a,
+section.feed form.delete input,
+#add-feed,
+#feed-types,
+#steps, .step-1 dl, .step-2 dl, .step-3 dl,
+.home article,
+footer {
+     -moz-border-radius: 10px; 
+  -webkit-border-radius: 10px;
+          border-radius: 10px;
+}
+
+.rounded-top,
+hgroup.main {
+     -moz-border-radius: 10px 10px 0 0; 
+  -webkit-border-radius: 10px 10px 0 0;
+          border-radius: 10px 10px 0 0;
+}
+
+.rounded-bottom,
+hgroup.page,
+nav.main {
+     -moz-border-radius: 0 0 10px 10px; 
+  -webkit-border-radius: 0 0 10px 10px;
+          border-radius: 0 0 10px 10px;
+}
+
+.shadow,
+fieldset,
+hgroup.main,
+hgroup.page,
+section.feed,
+.button,
+nav.main,
+article header a,
+section.feed form.delete input,
+#add-feed,
+#feed-types,
+#steps, .step-1 dl, .step-2 dl, .step-3 dl,
+.home article,
+footer {
+     -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+          box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}

@@ -1,0 +1,9 @@
+Rake task:
+update feeds instead of recreating them,
+remove articles that are no longer in the feeds
+
+Tests:
+more basic integration tests
+
+Javascript:
+Some issues when only one feed remains and I click on it.
