@@ -11,10 +11,11 @@ class Feed::Github < Feed
       case new_url
       when %r{^((http(s?)://)?github.com/[^/\.\?]+)(/|\.atom)?$}
         new_url = $1
-        new_url.insert(0, 'http://') unless new_url.match /^http/
+        new_url.gsub!('http://', 'https://')
+        new_url.insert(0, 'https://') unless new_url.match /^http/
         new_url + ".atom"
       when %r{^[a-zA-Z0-9]+$}
-        "http://github.com/#{new_url}.atom"
+        "https://github.com/#{new_url}.atom"
       else
         nil
       end
