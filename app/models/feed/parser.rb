@@ -23,8 +23,12 @@ module Feed::Parser
       begin
         xml = open(url, 'r', read_timeout: 5.0)
         RSS::Parser.parse(xml)
-      rescue
+      rescue Exception => e
+        $stderr.puts "**************************************************"
         $stderr.puts "There was an error fetching the feed #{name}, for #{user.try(:to_label) || 'no user'}"
+        $stderr.puts e.message
+        $stderr.puts e.backtrace
+        $stderr.puts "**************************************************"
         nil
       end
   end
