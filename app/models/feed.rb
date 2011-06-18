@@ -1,3 +1,5 @@
+require 'daemons/job'
+
 class Feed
 
   TYPES = %w(Blog Tumblr Flickr Delicious Twitter Github)
@@ -31,8 +33,6 @@ class Feed
   end
 
   def queue_job
-    require 'daemons/job'
-
     Daemons::Job.queue(self, priority: :medium) if first_url?
     Daemons::Job.queue(self, priority: :high)   if trying_app?
   end
