@@ -63,14 +63,14 @@ var SoManyFeeds = ( function() {
 
     if ( link.hasClass('selected') && selectedSources.length > 1 ) {
       selectedSources.splice( selectedSources.indexOf(source), 1 );
-      $('.article.'+source.toLowerCase()).hide();
+      $('article.'+source.toLowerCase()).hide();
 
       updatePage(true);
     }
 
-    else if ( !link.hasClass('selected') && $('.article.'+source.toLowerCase()).length > 0 ) {
+    else if ( !link.hasClass('selected') && $('article.'+source.toLowerCase()).length > 0 ) {
       selectedSources.push( source );
-      $('.article.'+source.toLowerCase()).show();
+      $('article.'+source.toLowerCase()).show();
 
       updatePage(true);
     }

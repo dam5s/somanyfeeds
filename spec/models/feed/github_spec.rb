@@ -11,7 +11,7 @@ describe Feed::Github do
     context "when info is a username" do
 
       before { subject.info = 'dam5s' }
-      its(:url) { should == 'http://github.com/dam5s.atom' }
+      its(:url) { should == 'https://github.com/dam5s.atom' }
 
     end
 
@@ -35,12 +35,12 @@ describe Feed::Github do
 
         context "without trailing slash" do
           before { subject.info = 'http://github.com/dam5s' }
-          its(:url) { should == 'http://github.com/dam5s.atom' }
+          its(:url) { should == 'https://github.com/dam5s.atom' }
         end
 
         context "with trailing slash" do
           before { subject.info = 'http://github.com/dam5s/' }
-          its(:url) { should == 'http://github.com/dam5s.atom' }
+          its(:url) { should == 'https://github.com/dam5s.atom' }
         end
 
       end
@@ -48,7 +48,7 @@ describe Feed::Github do
       context "without protocol" do
 
         before { subject.info = "github.com/dam5s" }
-        its(:url) { should == "http://github.com/dam5s.atom" }
+        its(:url) { should == "https://github.com/dam5s.atom" }
 
       end
 
@@ -58,7 +58,7 @@ describe Feed::Github do
 
       context "with http" do
         before { subject.info = 'http://github.com/dam5s.atom' }
-        its(:url) { should == 'http://github.com/dam5s.atom' }
+        its(:url) { should == 'https://github.com/dam5s.atom' }
       end
 
       context "with https" do
