@@ -61,19 +61,21 @@ describe Feed::Blog do
       end
 
       context "an absolute path" do
+
         before do
           @doc.should_receive(:css).with('link[rel=alternate]').and_return {
             [{'type' => 'rss', 'href' => '/feed.rss'}]
           }
+
+          subject.info = 'example.com/blog'
         end
 
-        it "should build the full url" do
-          subject.info = 'example.com/blog'
-          subject.url.should == 'http://example.com/feed.rss'
-        end
+        its(:url) { should == 'http://example.com/feed.rss' }
+
       end
 
       context "a relative path" do
+
         before do
           @doc.should_receive(:css).with('link[rel=alternate]').and_return {
             [{'type' => 'rss', 'href' => 'feed.rss'}]
@@ -82,21 +84,18 @@ describe Feed::Blog do
 
         context 'with a trailing slash' do
 
-          it "should build the full url" do
-            subject.info = 'example.com/blog/'
-            subject.url.should == 'http://example.com/blog/feed.rss'
-          end
+          before { subject.info = 'example.com/blog/' }
+          its(:url) { should == 'http://example.com/blog/feed.rss' }
 
         end
 
         context 'without trailing slash' do
 
-          it "should build the full url" do
-            subject.info = 'example.com/blog'
-            subject.url.should == 'http://example.com/feed.rss'
-          end
+          before { subject.info = 'example.com/blog' }
+          its(:url) { should == 'http://example.com/feed.rss' }
 
         end
+
       end
 
     end
