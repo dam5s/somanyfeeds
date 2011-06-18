@@ -55,6 +55,8 @@ describe Feed::Blog do
 
       before do
         @doc = mock
+        @doc.should_receive(:css).with('rss').and_return { nil }
+        @doc.should_receive(:css).with('feed').and_return { nil }
         Nokogiri.stub!(:parse).and_return{ @doc }
       end
 
@@ -78,9 +80,22 @@ describe Feed::Blog do
           }
         end
 
-        it "should build the full url" do
-          subject.info = 'example.com/blog'
-          subject.url.should == 'http://example.com/blog/feed.rss'
+        context 'with a trailing slash' do
+
+          it "should build the full url" do
+            subject.info = 'example.com/blog/'
+            subject.url.should == 'http://example.com/blog/feed.rss'
+          end
+
+        end
+
+        context 'without trailing slash' do
+
+          it "should build the full url" do
+            subject.info = 'example.com/blog'
+            subject.url.should == 'http://example.com/feed.rss'
+          end
+
         end
       end
 

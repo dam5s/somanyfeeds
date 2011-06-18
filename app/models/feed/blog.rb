@@ -16,24 +16,32 @@ class Feed::Blog < Feed
 
         feed = new_url if doc.css('rss').present? || doc.css('feed').present?
 
-        if feed
-          return feed
-
-        else
+        unless feed
           links = doc.css('link[rel=alternate]')
           rss   = links.find{|l| l['type'] =~ /rss/ }['href'] rescue nil
           atom  = links.find{|l| l['type'] =~ /atom/}['href'] rescue nil
-        end
-
-        feed = rss || atom
-
-        unless feed.match /^http/
+          feed  = append_host( rss || atom, new_url )
         end
 
         write_attribute :url, feed
 
       end # if doc
     end # if info
+  end
+
+private
+
+  def append_host( feed, base_url )
+    return feed if feed.blank? || feed.match(/^http/)
+
+    host =
+      if feed.match(%r[^/]) # absolute path
+        base_url.match( %r[^(http://[^/]+)/] )[1]
+      else # relative path
+        base_url.match( %r[^(http://.+/)[^/]*$] )[1]
+      end
+
+    host + feed
   end
 
 end
