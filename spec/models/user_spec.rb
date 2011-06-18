@@ -7,8 +7,8 @@ describe User do
   before(:all) do
     User.delete_all
 
-    subject.feeds = (0..4).map do |num|
-      Feed.new(name: "Some Feed #{num}", default: true)
+     (0..4).each do |num|
+       subject.feeds << Feed.new(name: "Some Feed #{num}", default: true)
     end
   end
 
@@ -95,6 +95,7 @@ describe User do
     subject { User.make_unsaved }
 
     before(:all) do
+      Daemons::Job.stub!(:queue)
       subject.feeds = [Feed.make_unsaved]
       subject.save!
 
