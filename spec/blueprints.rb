@@ -39,12 +39,13 @@ User.blueprint(:visitor) do
 end
 
 Feed.blueprint do
-  name { Sham.source }
-  url  { Sham.link }
+  name    { Sham.source }
+  url     { Sham.link }
+  default { true }
 end
 
-Feed::Blog.blueprint       { url{nil} }
-Feed::Github.blueprint     {}
-Feed::Twitter.blueprint    {}
-Feed::Tumblr.blueprint     {}
-Feed::Delicious.blueprint  {}
+Feed::Blog.blueprint       { name{'Blog'}; url{nil} }
+Feed::Github.blueprint     { name{'Github'}  }
+Feed::Twitter.blueprint    { name{'Twitter'} }
+Feed::Tumblr.blueprint     { name{'Tumblr'}  }
+Feed::Delicious.blueprint  { name{'Delicious'} }
