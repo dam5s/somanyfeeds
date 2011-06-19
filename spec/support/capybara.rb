@@ -29,7 +29,7 @@ module SoManyFeeds::IntegrationExampleGroup
     end
 
     RSpec.configure do |c|
-      c.include self, example_group: { file_path: /\bspec\/integration\/aggregator\// }
+      c.include self, example_group: { file_path: /\bspec\/acceptance\/aggregator\// }
     end
 
   end
@@ -48,7 +48,7 @@ module SoManyFeeds::IntegrationExampleGroup
     end
 
     RSpec.configure do |c|
-      c.include self, example_group: { file_path: /\bspec\/integration\/manager\// }
+      c.include self, example_group: { file_path: /\bspec\/acceptance\/manager\// }
     end
 
   end
