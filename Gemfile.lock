@@ -11,6 +11,9 @@ GEM
       builder (~> 2.1.2)
       i18n (~> 0.5.0)
     activesupport (3.0.8)
+    akephalos (0.2.5)
+      capybara (~> 0.4.0)
+      jruby-jars
     amqp (0.7.1)
       eventmachine (>= 0.12.4)
     archive-tar-minitar (0.5.2)
@@ -57,6 +60,7 @@ GEM
     jammit (0.5.4)
       closure-compiler (>= 0.1.0)
       yui-compressor (>= 0.9.1)
+    jruby-jars (1.6.2)
     json (1.5.1)
     json_pure (1.5.1)
     kgio (2.4.1)
@@ -174,6 +178,7 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport (~> 3.0.0)
+  akephalos
   amqp (~> 0.7.1)
   autotest
   awesome_print

@@ -19,6 +19,7 @@ group :development, :test do
   gem 'machinist_mongo', '>= 1.1.1'
   gem 'forgery', '>= 0.3.6'
   gem 'capybara', '>= 0.4.0'
+  gem 'akephalos'
   gem 'autotest'
   gem 'ruby-debug19'
   gem 'awesome_print', :require => 'ap'
