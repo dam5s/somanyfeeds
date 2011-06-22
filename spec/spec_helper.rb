@@ -23,16 +23,8 @@ require 'akephalos'
 # in spec/support/ and its subdirectories.
 Dir[ File.join(RACK_ROOT, 'spec/support/**/*.rb') ].each {|f| require f}
 
-Capybara.javascript_driver = :akephalos
+Capybara.default_driver = :akephalos
 
 RSpec.configure do |config|
   config.mock_with :rspec
-
-  config.before(:each, js: true) do
-    Capybara.current_driver = Capybara.javascript_driver
-  end
-
-  config.after(:each, js: true) do
-    Capybara.current_driver = Capybara.default_driver
-  end
 end

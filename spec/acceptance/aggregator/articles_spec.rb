@@ -18,7 +18,7 @@ def create_user_for_integration
 
 end
 
-describe SoManyFeeds::Aggregator, js: true do
+describe SoManyFeeds::Aggregator do
 
   before(:all) do
     create_user_for_integration
@@ -35,9 +35,11 @@ describe SoManyFeeds::Aggregator, js: true do
 
     page.should have_css('article.github', count: 5)
     page.should have_css('a.selected', text: 'Github')
+    page.should_not have_css('article.github.hidden')
 
     page.should have_css('article.tumblr', count: 5)
     page.should have_css('a.selected', text: 'Tumblr')
+    page.should_not have_css('article.tumblr.hidden')
 
     page.should_not have_css('article.twitter')
     page.should_not have_css('a.selected', text: 'Twitter')
@@ -51,12 +53,15 @@ describe SoManyFeeds::Aggregator, js: true do
 
     page.should have_css('article.github', count: 5)
     page.should have_css('a.selected', text: 'Github')
+    page.should_not have_css('article.github.hidden')
 
     page.should have_css('article.tumblr', count: 5)
     page.should have_css('a.selected', text: 'Tumblr')
+    page.should_not have_css('article.tumblr.hidden')
 
     page.should have_css('article.twitter', count: 5)
     page.should have_css('a.selected', text: 'Twitter')
+    page.should_not have_css('article.twitter.hidden')
 
   end
 
@@ -64,9 +69,17 @@ describe SoManyFeeds::Aggregator, js: true do
 
     click_on 'Github'
 
-    page.should_not have_css('article.github')
+    page.should have_css('a', text: 'Github')
+    page.should_not have_css('a.selected', text: 'Github')
+    #page.should have_css('article.github.hidden')
+
     page.should have_css('article.tumblr', count: 5)
+    page.should have_css('a.selected', text: 'Tumblr')
+    page.should_not have_css('article.tumblr.hidden')
+
     page.should have_css('article.twitter', count: 5)
+    page.should have_css('a.selected', text: 'Twitter')
+    page.should_not have_css('article.twitter.hidden')
 
   end
 
@@ -74,16 +87,17 @@ describe SoManyFeeds::Aggregator, js: true do
 
     click_on 'Tumblr'
 
-    page.should_not have_css('article.github')
-    page.should_not have_css('a.selected', text: 'Github')
+    #page.should have_css('article.github.hidden', count: 5)
     page.should have_css('a', text: 'Github')
+    page.should_not have_css('a.selected', text: 'Github')
 
-    page.should_not have_css('article.tumblr')
-    page.should_not have_css('a.selected', text: 'Tumblr')
+    #page.should have_css('article.tumblr.hidden', count: 5)
     page.should have_css('a', text: 'Tumblr')
+    page.should_not have_css('a.selected', text: 'Tumblr')
 
     page.should have_css('article.twitter', count: 5)
     page.should have_css('a.selected', text: 'Twitter')
+    page.should_not have_css('article.twitter.hidden')
 
   end
 
@@ -93,11 +107,13 @@ describe SoManyFeeds::Aggregator, js: true do
 
     page.should have_css('article.github', count: 5)
     page.should have_css('a.selected', text: 'Github')
+    page.should_not have_css('article.github.hidden')
 
     page.should have_css('article.tumblr', count: 5)
     page.should have_css('a.selected', text: 'Tumblr')
+    page.should_not have_css('article.tumblr.hidden')
 
-    page.should_not have_css('article.twitter')
+    #page.should have_css('article.twitter.hidden', count: 5)
     page.should_not have_css('a.selected', text: 'Twitter')
     page.should have_css('a', text: 'Twitter')
 

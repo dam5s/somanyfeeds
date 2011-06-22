@@ -40,8 +40,8 @@ var SoManyFeeds = ( function() {
     var newSources = selectedSources.slice();
     var source = link.attr('data-source')
 
-    if (( link.hasClass('selected') && selectedSources.indexOf(source) < 0 ) ||
-    ( !link.hasClass('selected') && selectedSources.indexOf(source) >= 0))
+    if (( link.hasClass('selected')  && selectedSources.indexOf(source) < 0 ) ||
+        ( !link.hasClass('selected') && selectedSources.indexOf(source) >= 0))
       link.toggleClass('selected');
 
     if ( link.hasClass('selected') )
@@ -58,19 +58,20 @@ var SoManyFeeds = ( function() {
 
     var link = $(this);
     var source = link.attr('data-source');
+    var articles = $( 'article.'+source.toLowerCase() );
 
     $('#loading').show();
 
     if ( link.hasClass('selected') && selectedSources.length > 1 ) {
       selectedSources.splice( selectedSources.indexOf(source), 1 );
-      $('article.'+source.toLowerCase()).hide();
+      articles.addClass('hidden');
 
       updatePage(true);
     }
 
-    else if ( !link.hasClass('selected') && $('article.'+source.toLowerCase()).length > 0 ) {
+    else if ( !link.hasClass('selected') && articles.length > 0 ) {
       selectedSources.push( source );
-      $('article.'+source.toLowerCase()).show();
+      articles.removeClass('hidden');
 
       updatePage(true);
     }
