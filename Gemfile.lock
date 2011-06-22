@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/asceth/akephalos.git
+  remote: git://github.com/dam5s/akephalos.git
   revision: 5fae2f95792fb25349ef870514e7fbb3b76d0983
   specs:
     akephalos (0.2.5)
