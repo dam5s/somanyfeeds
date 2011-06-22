@@ -29,89 +29,77 @@ describe SoManyFeeds::Aggregator, js: true do
     Article.delete_all
   end
 
-  subject { page }
+  it 'should display 2 default feeds' do
 
-  describe 'initial page with 2 out of 3 feeds' do
+    visit '/'
 
-    before do
-      visit '/'
-    end
+    page.should have_css('article.github', count: 5)
+    page.should have_css('a.selected', text: 'Github')
 
-    it { should have_css('article.github', count: 5) }
-    it { should have_css('a.selected', text: 'Github') }
+    page.should have_css('article.tumblr', count: 5)
+    page.should have_css('a.selected', text: 'Tumblr')
 
-    it { should have_css('article.tumblr', count: 5) }
-    it { should have_css('a.selected', text: 'Tumblr') }
+    page.should_not have_css('article.twitter')
+    page.should_not have_css('a.selected', text: 'Twitter')
+    page.should have_css('a', text: 'Twitter')
 
-    it { should_not have_css('article.twitter') }
-    it { should_not have_css('a.selected', text: 'Twitter') }
-    it { should have_css('a', text: 'Twitter') }
+  end
 
-    describe 'select one more feed' do
+  it 'should select one more feed' do
 
-      before do
-        click_on 'Twitter'
-      end
+    click_on 'Twitter'
 
-      it { should have_css('article.github', count: 5) }
-      it { should have_css('a.selected', text: 'Github') }
+    page.should have_css('article.github', count: 5)
+    page.should have_css('a.selected', text: 'Github')
 
-      it { should have_css('article.tumblr', count: 5) }
-      it { should have_css('a.selected', text: 'Tumblr') }
+    page.should have_css('article.tumblr', count: 5)
+    page.should have_css('a.selected', text: 'Tumblr')
 
-      it { should have_css('article.twitter', count: 5) }
-      it { should have_css('a.selected', text: 'Twitter') }
+    page.should have_css('article.twitter', count: 5)
+    page.should have_css('a.selected', text: 'Twitter')
 
-      describe 'deselect one feed' do
+  end
 
-        before do
-          click_on 'Github'
-        end
+  it 'should deselect one feed' do
 
-        it { should_not have_css('article.github') }
-        it { should have_css('article.tumblr', count: 5) }
-        it { should have_css('article.twitter', count: 5) }
+    click_on 'Github'
 
-        describe 'select only one feed' do
+    page.should_not have_css('article.github')
+    page.should have_css('article.tumblr', count: 5)
+    page.should have_css('article.twitter', count: 5)
 
-          before do
-            click_on 'Tumblr'
-          end
+  end
 
-          it { should_not have_css('article.github') }
-          it { should_not have_css('a.selected', text: 'Github') }
-          it { should have_css('a', text: 'Github') }
+  it 'should select only one feed' do
 
-          it { should_not have_css('article.tumblr') }
-          it { should_not have_css('a.selected', text: 'Tumblr') }
-          it { should have_css('a', text: 'Tumblr') }
+    click_on 'Tumblr'
 
-          it { should have_css('article.twitter', count: 5) }
-          it { should have_css('a.selected', text: 'Twitter') }
+    page.should_not have_css('article.github')
+    page.should_not have_css('a.selected', text: 'Github')
+    page.should have_css('a', text: 'Github')
 
-          describe 'deselect last selected feed should select default feeds' do
+    page.should_not have_css('article.tumblr')
+    page.should_not have_css('a.selected', text: 'Tumblr')
+    page.should have_css('a', text: 'Tumblr')
 
-            before do
-              click_on 'Twitter'
-            end
+    page.should have_css('article.twitter', count: 5)
+    page.should have_css('a.selected', text: 'Twitter')
 
-            it { should have_css('article.github', count: 5) }
-            it { should have_css('a.selected', text: 'Github') }
+  end
 
-            it { should have_css('article.tumblr', count: 5) }
-            it { should have_css('a.selected', text: 'Tumblr') }
+  it 'should select back default feeds' do
 
-            it { should_not have_css('article.twitter') }
-            it { should_not have_css('a.selected', text: 'Twitter') }
-            it { should have_css('a', text: 'Twitter') }
+    click_on 'Twitter'
 
-          end
+    page.should have_css('article.github', count: 5)
+    page.should have_css('a.selected', text: 'Github')
 
-        end
+    page.should have_css('article.tumblr', count: 5)
+    page.should have_css('a.selected', text: 'Tumblr')
 
-      end
-
-    end
+    page.should_not have_css('article.twitter')
+    page.should_not have_css('a.selected', text: 'Twitter')
+    page.should have_css('a', text: 'Twitter')
 
   end
 
