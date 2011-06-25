@@ -119,6 +119,7 @@ GEM
     racksh (0.9.8)
       rack (>= 1.0)
       rack-test (>= 0.5)
+    rake (0.8.7)
     rspec (2.6.0)
       rspec-core (~> 2.6.0)
       rspec-expectations (~> 2.6.0)
@@ -196,6 +197,7 @@ DEPENDENCIES
   rack-flash (~> 0.1.1)
   rackamole
   racksh
+  rake
   rspec (>= 2.2.0)
   ruby-debug19
   shotgun

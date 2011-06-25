@@ -1,5 +1,6 @@
 source :rubygems
 
+gem 'rake'
 gem 'unicorn', '~> 3.3.1'
 gem 'activesupport', '~> 3.0.0'
 gem 'sinatra', '~> 1.2.0'
