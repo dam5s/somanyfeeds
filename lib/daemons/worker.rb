@@ -13,9 +13,7 @@ module Daemons
     def self.start!
       shutdown = Proc.new do
         EM.forks.each{ |pid| Process.kill 'KILL', pid }
-        AMQP.stop { EM.stop }
-
-        exit(0)
+        exit 0
       end
 
       Signal.trap 'INT', shutdown
