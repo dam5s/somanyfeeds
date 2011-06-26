@@ -12,6 +12,7 @@ gem 'rackamole'
 gem 'nokogiri'
 gem 'amqp', '~> 0.7.1'
 gem 'bunny'
+gem 'god'
 
 group :development, :test do
   gem 'sinatra-reloader'

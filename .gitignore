@@ -3,3 +3,4 @@
 db_backups
 .rake_tasks
 .DS_Store
+log/*
