@@ -5,7 +5,9 @@ module Parser
   module Entry
 
     def save!(options = {})
-      Article.new(attributes.merge options).save!
+      user = options.delete(:user)
+      user.articles << Article.new(attributes.merge options)
+      user.save!
     end
 
     def attributes

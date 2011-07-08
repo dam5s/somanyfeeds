@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-def create_user_for_integration
+def create_user_for_acceptance
 
   user = User.make_unsaved(:registered)
 
@@ -11,7 +11,9 @@ def create_user_for_integration
   user.save!
 
   user.feeds.each do |feed|
-    5.times { Article.make(source: feed.slug, user: user) }
+    5.times do
+      user.articles << Article.make(source: feed.slug)
+    end
   end
 
   user
@@ -21,12 +23,11 @@ end
 describe SoManyFeeds::Aggregator do
 
   before(:all) do
-    create_user_for_integration
+    create_user_for_acceptance
   end
 
   after(:all) do
     User.delete_all
-    Article.delete_all
   end
 
   it 'should display 2 default feeds' do

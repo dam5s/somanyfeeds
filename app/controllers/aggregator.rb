@@ -54,7 +54,11 @@ module SoManyFeeds
 
     def find_user
       server_name = env['SERVER_NAME']
-      server_name.sub!('.dev', '.com') unless production?
+
+      unless production?
+        server_name.sub! '.dev',   '.com'
+        server_name.sub! '.local', '.com'
+      end
 
       @user =
         if server_name =~ /^(.+)\.somanyfeeds\.com$/

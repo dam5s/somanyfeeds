@@ -10,7 +10,7 @@ class Article
   field :entry_id,    type: String
   field :source,      type: String
 
-  referenced_in :user
+  embedded_in :user
 
   index :date
 

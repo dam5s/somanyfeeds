@@ -22,13 +22,12 @@ class Feed
 
   def update_articles
     if self.slug_was
-      articles = self.user.articles.where(source: self.slug_was)
 
-      Article.collection.update(
-        articles.selector,
-        {'$set' => {'source' => self.slug}},
-        {upsert: false, multi: true, safe: true}
-      )
+      self.user.articles.where(source: self.slug_was).to_a.each do |a|
+        a.source = self.slug
+        a.save!
+      end
+
     end
   end
 

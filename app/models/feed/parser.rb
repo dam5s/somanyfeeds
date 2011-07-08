@@ -15,7 +15,7 @@ module Feed::Parser
     end
 
     excess = self.articles.desc(:date).skip(10)
-    Article.collection.remove( "_id" => {"$in" => excess.map(&:id)} )
+    self.user.articles.delete_all conditions: { id: excess.map(&:id) }
   end
 
   def parse

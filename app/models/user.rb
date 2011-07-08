@@ -10,7 +10,7 @@ class User
   field :domain_name, type: String
 
   embeds_many :feeds
-  references_many :articles
+  embeds_many :articles
 
   require 'user/authentication'
   include User::Authentication

@@ -7,7 +7,7 @@ describe Article do
     subject { Article.make_unsaved }
 
     it { should be_valid }
-    it { should be_referenced_in :user }
+    it { should be_embedded_in :user }
 
   end
 
