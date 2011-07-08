@@ -10,8 +10,6 @@ module SoManyFeeds
 
     included do
 
-      use Rack::Mole, rackamole_config if production?
-
       set :views,  File.join(RACK_ROOT, 'app/views', to_var)
       set :haml, format: :html5
       set :public, File.join(RACK_ROOT, 'public') if development?
@@ -143,19 +141,6 @@ module SoManyFeeds
 
       def to_var
         to_s.downcase.split('::').last
-      end
-
-      def rackamole_config
-        {
-          app_name: to_var,
-          user_key: :user_id,
-          email: {
-            from: "rackamole+#{to_var}@somanyfeeds.com",
-            to: "damien@meliondesign.com",
-            alert_on: [ Rackamole.perf, Rackamole.fault ]
-          },
-          store: Rackamole::Store::MongoDb.new(db_name: "mole_#{to_var}_#{RACK_ENV}_mdb")
-        }
       end
 
     end
