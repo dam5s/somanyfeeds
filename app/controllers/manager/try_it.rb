@@ -69,12 +69,16 @@ module SoManyFeeds
       end
 
       get '/try-it/save' do
+        redirect '/try-it/closed' and return
+
         @title =  'Save your feed'
         @title << 's' if visitor.feeds.size > 0
         respond :save
       end
 
       post '/try-it/save' do
+        redirect '/try-it/closed' and return
+
         attributes = params['user'][visitor.id.to_s]
         visitor.attributes = attributes
         visitor.registered = true
@@ -89,6 +93,10 @@ module SoManyFeeds
           flash[:error] = 'There were errors saving'
           respond :save
         end
+      end
+
+      get '/try-it/closed' do
+        respond :closed
       end
 
     end

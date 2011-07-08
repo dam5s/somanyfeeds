@@ -233,17 +233,20 @@ a.button, a.button:visited {
  * Home Page
  */
 
-.home article {
+.home article,
+article.closed {
   width: 94%;
   margin: 0 2%;
   padding: 1em 1%;
   background-color: #eee;
 }
-  .home article p {
+  .home article p,
+  article.closed p {
     padding: .5em 1em
   }
 
-.home a.button {
+.home a.button,
+a.closed {
   margin: 2% 0 0 2%
 }
 
