@@ -6,7 +6,7 @@ module SoManyFeeds::IntegrationExampleGroup
   module Application
 
     include Rack::Test::Methods
-    include Capybara
+    include Capybara::DSL
     include RSpec::Matchers
 
     def last_response

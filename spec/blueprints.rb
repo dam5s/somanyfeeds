@@ -15,7 +15,6 @@ Sham.password_confirmation { Sham.password }
 
 Article.blueprint do
   title
-  link
   description
   date
   entry_id

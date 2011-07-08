@@ -38,7 +38,6 @@ describe SoManyFeeds::Aggregator do
       page.response_headers['Content-Type'].should =~ %r[application/rss\+xml]
     end
 
-    it { should have_content('Oops we could not find what you are looking for!') }
     it { should_not have_xpath('//rss') }
 
   end
