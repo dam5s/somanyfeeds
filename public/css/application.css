@@ -40,6 +40,9 @@ section.feed form.delete input,
 #feed-types,
 #steps, .step-1 dl, .step-2 dl, .step-3 dl,
 .home article,
+.home section.github h2,
+.home section.github ol,
+article.closed,
 footer {
      -moz-border-radius: 10px; 
   -webkit-border-radius: 10px;
@@ -74,6 +77,9 @@ section.feed form.delete input,
 #feed-types,
 #steps, .step-1 dl, .step-2 dl, .step-3 dl,
 .home article,
+.home section.github h2,
+.home section.github ol,
+article.closed,
 footer {
      -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
   -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);

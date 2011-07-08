@@ -1,12 +1,24 @@
-%article
-  %p
-    So Many Feeds is a feed aggregator.
-  %p
-    Easily manage your feeds from different social websites,
-    and aggregate in one simple home page.
-  %p
-    So Many Feeds will automatically generate for you
-    any combination of your feeds you like,
-    both as a web page and as a RSS feed.
+%section.about
+  %article
+    %p
+      So Many Feeds is a feed aggregator.
+    %p
+      Easily manage your feeds from different social websites,
+      and aggregate in one simple home page.
+    %p
+      So Many Feeds will automatically generate for you
+      any combination of your feeds you like,
+      both as a web page and as a RSS feed.
 
-%a.button{href: '/try-it'} get started!
+  %a.button{href: '/try-it'} get started!
+
+%section.github
+  %h2 Github activity
+  %ol
+    - @commits.first(5).each do |c|
+      %li
+        %img{src: git_avatar(c), class: 'avatar'}
+        = git_msg c
+  %a{href: "http://github.com/dam5s/somanyfeeds", class: "button"} fork me!
+
+

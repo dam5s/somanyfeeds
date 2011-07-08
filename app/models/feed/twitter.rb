@@ -14,7 +14,7 @@ class Feed::Twitter < Feed
         new_url
       when %r{^((http(s?)://)?twitter.com/(#!/)?([^/\.\?]+))/?$}
         "http://twitter.com/statuses/user_timeline/#{$5}.rss"
-      when %r{^[a-zA-Z0-9]+$}
+      when %r{^[a-zA-Z0-9_]+$}
         "http://twitter.com/statuses/user_timeline/#{new_url}.rss"
       else
         nil

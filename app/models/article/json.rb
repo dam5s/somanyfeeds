@@ -19,7 +19,7 @@ module Article::JSON
     attributes = [ :id, :link, :title, :feed_name,
       :datetime, :display_date, :content, :source ]
 
-    Hash.from_keys( attributes ) { |attr| send(attr) }
+    Hash.from_keys( attributes ) { |attr| send attr }
   end
 
 end

@@ -94,3 +94,7 @@ footer {
 section.main {
   padding-top: 10.5em;
 }
+
+article.hidden {
+  display: none;
+}

@@ -15,7 +15,7 @@ module Feed::Parser
     end
 
     excess = self.articles.desc(:date).skip(10)
-    Article.collection.remove( "_id" => {"$in" => excess.map(&:id)} )
+    self.user.articles.delete_all conditions: { id: excess.map(&:id) }
   end
 
   def parse
@@ -24,6 +24,8 @@ module Feed::Parser
         xml = open(url, 'r', read_timeout: 5.0)
         RSS::Parser.parse(xml)
       rescue Exception => e
+        return if test?
+
         $stderr.puts "**************************************************"
         $stderr.puts "There was an error fetching the feed #{name}, for #{user.try(:to_label) || 'no user'}"
         $stderr.puts e.message

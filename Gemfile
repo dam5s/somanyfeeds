@@ -1,5 +1,6 @@
 source :rubygems
 
+gem 'rake'
 gem 'unicorn', '~> 3.3.1'
 gem 'activesupport', '~> 3.0.0'
 gem 'sinatra', '~> 1.2.0'
@@ -11,6 +12,7 @@ gem 'rackamole'
 gem 'nokogiri'
 gem 'amqp', '~> 0.7.1'
 gem 'bunny'
+gem 'god'
 
 group :development, :test do
   gem 'sinatra-reloader'
@@ -18,7 +20,8 @@ group :development, :test do
   gem 'mongoid-rspec', '>= 1.3.2'
   gem 'machinist_mongo', '>= 1.1.1'
   gem 'forgery', '>= 0.3.6'
-  gem 'capybara', '>= 0.4.0'
+  gem 'capybara', '>= 1.0.0.beta1'
+  gem 'akephalos', :git => 'git://github.com/dam5s/akephalos.git'
   gem 'autotest'
   gem 'ruby-debug19'
   gem 'awesome_print', :require => 'ap'

@@ -17,13 +17,4 @@ namespace :db do
 
   end # feeds
 
-  namespace :jobs do
-
-    desc 'Run jobs'
-    task :run do
-      Job.run_all!
-    end
-
-  end # jobs
-
 end # db

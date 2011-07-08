@@ -15,8 +15,8 @@ module Daemons
 
     def publish!
       bunny do |b|
-        b.exchange( AMQP_CONFIG[:topic], :type => :topic )
-         .publish( Marshal.dump( self ), :key => self.key )
+        b.exchange( AMQP_CONFIG[:topic], type: :topic )
+         .publish( Marshal.dump( self ), key: self.key )
       end
     end
 

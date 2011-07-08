@@ -2,22 +2,25 @@ require 'spec_helper'
 
 describe Article do
 
-  describe "Persistence" do
+  describe 'Persistence' do
 
     subject { Article.make_unsaved }
 
     it { should be_valid }
-    it { should be_referenced_in :user }
+    it { should be_embedded_in :user }
 
   end
 
-  describe "JSON format" do
+  describe '#feed_name' do
 
-    subject { Article.make_unsaved.encode_json(nil) }
+    before(:all) do
+      @user = User.make_unsaved
+      @user.feeds << Feed.make_unsaved( name: 'Foo', slug: 'foo' )
+    end
 
-    it { should_not =~ /"created_at"/ }
-    it { should_not =~ /"updated_at"/ }
-    it { should_not =~ /"_id"/ }
+    subject { Article.make_unsaved(user: @user, source: 'foo') }
+
+    its(:feed_name) { should == 'Foo' }
 
   end
 

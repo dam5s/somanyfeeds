@@ -1,57 +1,45 @@
-require File.expand_path( '../boot', __FILE__ )
+require File.expand_path( '../../../config/application', __FILE__ )
+
 require File.expand_path( '../job', __FILE__ )
+require File.expand_path( '../publisher', __FILE__ )
+require File.expand_path( '../consumer', __FILE__ )
 
 module Daemons
 
-  class Publisher
+  module Worker
 
-    def initialize( options = {} )
-      @@job ||= 1
+    PID_FILE = File.join( RACK_ROOT, 'tmp/pids/worker.pid' )
 
-      EM.fork(1) {
-        exch = AMQP::Channel.new.topic AMQP_CONFIG[:topic]
+    def self.start!
+      shutdown = Proc.new do
+        EM.forks.each{ |pid| Process.kill 'KILL', pid }
+        exit 0
+      end
 
-        EM.add_periodic_timer(1) do
-          priority = %w(high medium low)[ rand(3) ]
+      Signal.trap 'INT', shutdown
+      Signal.trap 'TERM', shutdown
 
-          puts "Publishing job num #{@@job} with priority #{priority}"
-          exch.publish Marshal.dump( "Job num: #{@@job}" ), :key => "jobs.#{priority}"
-          @@job += 1
-        end
-      }
+      File.open( PID_FILE, 'w' ) { |f| f << Process.pid }
+
+      AMQP_CONFIG[:consumers].each do |config|
+        Consumer.new config
+      end
+
+      sleep 5 while EM.forks.present?
     end
 
-  end # class Publisher
-
-  class Consumer
-
-    def initialize( options = {} )
-      opts = { workers: 1 }.merge( options )
-
-      EM.fork( opts[:workers] ) {
-        exch = AMQP::Channel.new.topic AMQP_CONFIG[:topic]
-
-        AMQP::Channel.new.queue( opts[:name] ).bind(exch, :key => opts[:key]).subscribe do |job|
-          job = Marshal.load job
-          print "[#{ opts[:name] }] Processing #{job}..."
-
-          job.run!
-          puts "... done."
+    def self.stop!
+      if File.exists? PID_FILE
+        begin
+          Process.kill 'TERM', File.read( PID_FILE ).to_i
+        rescue
+        ensure
+          require 'fileutils'
+          FileUtils.rm_f PID_FILE
         end
-      }
+      end
     end
 
-  end # class Consumer
+  end
 
 end # module Daemons
-
-AMQP_CONFIG[:consumers].each do |config|
-  Daemons::Consumer.new config
-end
-
-#Daemons::Publisher.new
-
-# wait on forks
-while !EM.forks.empty?
-  sleep(5)
-end
