@@ -15,6 +15,7 @@ module SoManyFeeds
 
     helpers do
       include ApplicationHelper
+      include ManagerHelper
       include JammitHelper
       include SessionHelper
       include FormHelper
@@ -23,6 +24,7 @@ module SoManyFeeds
     get '/' do
 
       @title = 'Welcome'
+      @commits = JSON.parse open("https://api.github.com/repos/dam5s/somanyfeeds/commits").read
       respond :index
 
     end

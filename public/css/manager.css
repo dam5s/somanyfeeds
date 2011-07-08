@@ -252,22 +252,52 @@ a.button, a.button:visited {
  * Home Page
  */
 
-.home article,
-article.closed {
-  width: 94%;
-  margin: 0 2%;
-  padding: 1em 1%;
-  background-color: #eee;
+.home section.about { margin: 0 1% 0 2%; }
+
+.home section.github { margin: 0 2% 0 1%; }
+
+.home section.github h2 {
+  color: #fff;
+  background-color: #326E9C;
+  padding: .5em;
 }
-  .home article p,
-  article.closed p {
-    padding: .5em 1em
+
+.home article, .home ol, article.closed {
+  background-color: #eee;
+  padding: 1em 1%;
+}
+
+.home ol {
+  list-style-type: none;
+  list-style-position: inside;
+  margin: 2% 0 0 0;
+}
+
+.home .github li {
+  padding: .5em 1em;
+}
+  .home .github .avatar {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    padding: 2px;
+    background-color: #fff;
   }
 
-.home a.button,
-a.closed {
-  margin: 2% 0 0 2%
+.home section.about, .home section.github {
+  width: 47%;
+  float: left;
 }
+.home article p, article.closed p {
+  padding: .5em 1em;
+}
+
+.home a.button { margin-top: 2%; }
+
+
+
+article.closed { width: 94%; margin: 0 2%; }
+a.closed { margin: 2% 0 0 2%; }
 
 
 /*
