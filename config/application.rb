@@ -7,7 +7,6 @@ RACK_ROOT = File.expand_path( File.join File.dirname(__FILE__), '..' )
 require 'sinatra/base'
 require 'active_support'
 require 'mongoid'
-require 'rackamole'
 
 $LOAD_PATH << RACK_ROOT
 $LOAD_PATH << File.join( RACK_ROOT, 'lib' )
