@@ -11,7 +11,6 @@ class User
 
   embeds_many :feeds
   references_many :articles
-  references_many :jobs
 
   require 'user/authentication'
   include User::Authentication
