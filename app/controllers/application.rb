@@ -119,7 +119,7 @@ module SoManyFeeds
       end
 
       def error_500
-        self.class.log_error($!)
+        self.class.log_error(env, $!)
 
         if html?
           respond 500
@@ -147,10 +147,15 @@ module SoManyFeeds
         to_s.downcase.split('::').last
       end
 
-      def log_error exception
+      def log_error env, ex
+        req = Rack::Request.new(env)
+
         message  = "******************************\n"
-        message << "#{exception.class}: #{exception.message}\n"
-        message << exception.backtrace.map { |l| "\t#{l}" }.join("\n")
+        message << "#{req.request_method} #{req.fullpath}\n"
+        message << "Params #{req.params}\n"
+        message << "#{ex.class}: #{ex.message}\n"
+        message << "******************************\n"
+        message << ex.backtrace.map { |l| "\t#{l}" }.join("\n") << "\n"
         message << "******************************\n"
 
         log_file.write message
