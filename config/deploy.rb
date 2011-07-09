@@ -31,7 +31,6 @@ set :default_environment, {
    'BUNDLE_PATH' => "#{RVM_PATH}/gems/#{RVM_RUBY}"
 }
 
-
 before "deploy", "db:dump"
 
 # Task to run bundle install - per instructions from EngineYard
@@ -50,6 +49,21 @@ namespace :deploy do
   task :restart, :roles => :app do
     run "cd #{current_path} && ln -sf #{shared_path}/unicorn.rb config/unicorn.rb"
     run "if [ -f #{shared_path}/pids/unicorn.pid ]; then kill -USR2 `cat #{shared_path}/pids/unicorn.pid`; else cd #{current_path} && RACK_ENV=production bundle exec unicorn -c config/unicorn.rb -D; fi"
+  end
+end
+
+before "worker:restart", "worker:stop", "worker:start"
+
+namespace :worker do
+  task :start, :roles => :app do
+    run "cd #{current_path} && RACK_ENV=production rake worker:start >> #{shared_path}/log/worker.stdout.log 2>> #{shared_path}/log/worker.stderr.log &"
+  end
+
+  task :stop, :roles => :app do
+    run "cd #{current_path} && RACK_ENV=production rake worker:stop"
+  end
+
+  task :restart, :roles => :app do
   end
 end
 
