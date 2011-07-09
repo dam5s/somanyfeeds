@@ -19,10 +19,10 @@ namespace :db do
 
   namespace :visitors do
 
-      desc 'Clean old visitors'
-      task :clean do
-        User.clean_visitors!
-      end
+    desc 'Clean old visitors'
+    task :clean do
+      User.clean_visitors!
+    end
 
   end # visitors
 
