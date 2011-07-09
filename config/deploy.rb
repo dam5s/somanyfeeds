@@ -24,10 +24,10 @@ RVM_RUBY = 'ruby-1.9.2-p180'
 RVM_PATH = '/home/www/.rvm'
 
 set :default_environment, {
-          'PATH' => "#{RVM_PATH}/gems/#{RVM_RUBY}@global/bin:#{RVM_PATH}/gems/#{RVM_RUBY}/bin:$PATH",
+          'PATH' => "#{RVM_PATH}/gems/#{RVM_RUBY}@somanyfeeds/bin:#{RVM_PATH}/gems/#{RVM_RUBY}@global/bin:#{RVM_PATH}/gems/#{RVM_RUBY}/bin:$PATH",
   'RUBY_VERSION' => RVM_RUBY,
       'GEM_HOME' => "#{RVM_PATH}/gems/#{RVM_RUBY}",
-      'GEM_PATH' => "#{RVM_PATH}/gems/#{RVM_RUBY}@global:#{RVM_PATH}/gems/#{RVM_RUBY}",
+      'GEM_PATH' => "#{RVM_PATH}/gems/#{RVM_RUBY}@somanyfeeds:#{RVM_PATH}/gems/#{RVM_RUBY}@global:#{RVM_PATH}/gems/#{RVM_RUBY}",
    'BUNDLE_PATH' => "#{RVM_PATH}/gems/#{RVM_RUBY}"
 }
 
