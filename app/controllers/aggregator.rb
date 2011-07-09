@@ -14,7 +14,6 @@ module SoManyFeeds
       include NavigationHelper
     end
 
-
     #
     # GET /
     # GET /index

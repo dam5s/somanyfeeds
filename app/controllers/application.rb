@@ -11,8 +11,10 @@ module SoManyFeeds
     included do
 
       set :views,  File.join(RACK_ROOT, 'app/views', to_var)
-      set :haml, format: :html5
       set :public, File.join(RACK_ROOT, 'public') if development?
+      set :haml, format: :html5
+
+      use Rack::CommonLogger, log_file
 
       mime_type :rss,  'application/rss+xml'
       mime_type :html, 'text/html'
@@ -117,6 +119,8 @@ module SoManyFeeds
       end
 
       def error_500
+        self.class.log_error($!)
+
         if html?
           respond 500
         else
@@ -141,6 +145,19 @@ module SoManyFeeds
 
       def to_var
         to_s.downcase.split('::').last
+      end
+
+      def log_error exception
+        message  = "******************************\n"
+        message << "#{exception.class}: #{exception.message}\n"
+        message << exception.backtrace.map { |l| "\t#{l}" }.join("\n")
+        message << "******************************\n"
+
+        log_file.write message
+      end
+
+      def log_file
+        ( @@log_files ||= {} )[ to_var ] ||= File.open("log/#{to_var}.log", File::WRONLY | File::APPEND)
       end
 
     end
