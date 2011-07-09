@@ -11,8 +11,8 @@ module SoManyFeeds
 
         if logged_in?
           redirect '/my-feeds'
-        else
-          session[:visitor_id] ||= User.create_visitor!.id
+        elsif visitor.nil?
+          session[:visitor_id] = User.create_visitor!.id
         end
       end
 

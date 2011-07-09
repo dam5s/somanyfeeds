@@ -51,4 +51,8 @@ class User
     all.each &:update!
   end
 
+  def self.clean_visitors!
+    where(registered: false, :updated_at.lt => 2.hours.ago).delete_all
+  end
+
 end
