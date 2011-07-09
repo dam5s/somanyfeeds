@@ -1,0 +1,8 @@
+:smtp:
+  :server: smtp.gmail.com
+  :port: 465
+  :account: user@somanyfeeds.com
+  :password: password
+:from:
+  :email: info@somanyfeeds.com
+  :label: SoManyFeeds.com
