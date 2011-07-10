@@ -18,6 +18,9 @@ class User
   require 'user/registration'
   include User::Registration
 
+  require 'user/password_reset'
+  include User::PasswordReset
+
   attr_accessible :email,
     :username,
     :password,

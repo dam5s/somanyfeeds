@@ -1,10 +1,10 @@
 module Mailer
 
-  def self.password_recovery( user )
+  def self.send_password_recovery( user )
     return unless user.email.present?
 
     message  = "Someone requested to reset your password. If that's you, you may do with the following link:"
-    message << " http://somanyfeeds.com/reset-password/#{user.reset_password_hash}"
+    message << " http://somanyfeeds.com/reset-password/#{user.reset_hash}"
 
     deliver subject: "Reset your SoManyFeeds.com password",
             body: message,
@@ -14,6 +14,8 @@ module Mailer
 private
 
   def self.deliver(options = {})
+    return if %w(development test).include? RACK_ENV
+
     Mail.deliver do
       to       options[:to]
       from     config[:from]
