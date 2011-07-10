@@ -9,7 +9,7 @@ module SessionHelper
   end
 
   def visitor
-    @visitor ||= User.find(session[:visitor_id])
+    @visitor ||= User.find(session[:visitor_id]) unless session[:visitor_id].blank?
   end
 
   def visiting?
