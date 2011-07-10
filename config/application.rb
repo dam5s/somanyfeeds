@@ -25,9 +25,10 @@ require_files 'config/initializers/*.rb'
 require "config/environments/#{RACK_ENV}"
 
 #
-# Core Extensions
+# Core Extensions, and libs
 #
 require_files 'lib/ext/*.rb'
+require 'lib/mailer'
 
 #
 # Models

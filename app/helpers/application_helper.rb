@@ -42,11 +42,11 @@ module ApplicationHelper
   end
 
   #
-  # Find template in @namespace, or /shared, or /
+  # Find template in @controller, or /shared, or /
   # first found, first served
   #
   def find_view( template )
-    [ @namespace, 'shared', '' ].compact.each do |folder|
+    [ @controller, 'shared', '' ].compact.each do |folder|
 
       file_name = "#{folder}/#{template}.#{@format}"
       file_path = File.join( settings.views, file_name + '.haml' )

@@ -6,7 +6,7 @@ module SoManyFeeds
     included do
 
       before '/*-feed*' do
-        @namespace = 'user'
+        @controller = 'user'
       end
 
       get '/my-feeds' do

@@ -1,0 +1,16 @@
+%form.password{action: '/password/reset/'+@user.reset_hash, method: 'POST'}
+
+  %fieldset
+    %dl
+      %dt
+        - label(@user, :password)
+        = errors(@user, :password)
+      %dd
+        - password_field(@user, :password)
+      %dt
+        - label(@user, :password_confirmation)
+        = errors(@user, :password_confirmation)
+      %dd
+        - password_field(@user, :password_confirmation)
+
+    %input{type: 'submit', value: 'set password', class: 'button'}

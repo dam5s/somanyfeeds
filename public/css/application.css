@@ -28,6 +28,7 @@ a:hover {
 
 h1,h2 { font-size: 300%; text-align: center; }
 h2    { font-size: 180%; }
+h1,h2,h3,.button { font-family: 'Neuton', serif; }
 
 
 .rounded,

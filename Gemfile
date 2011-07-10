@@ -13,6 +13,7 @@ gem 'nokogiri'
 gem 'amqp', '~> 0.7.1'
 gem 'bunny'
 gem 'god'
+gem 'mail', '~> 2.3.0'
 
 group :development, :test do
   gem 'sinatra-reloader'

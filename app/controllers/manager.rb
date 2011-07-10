@@ -12,6 +12,7 @@ module SoManyFeeds
     include Feeds
     include Account
     include TryIt
+    include Password
 
     helpers do
       include ApplicationHelper

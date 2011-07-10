@@ -92,7 +92,6 @@ section.feed ul {
   list-style: none;
 }
 
-
 form {}
 
   input { padding: 1%; }
@@ -126,15 +125,18 @@ form {}
   dt, dd { padding: .2em 0; }
   label { padding: .5em 0; font-weight: 300; color: #999; display: inline-block; }
 
-
-
 /*
- * Login Form
+ * Login and Password Reset Forms
  */
-fieldset.login { float: none; width: 90%; }
-input.login { margin-top: 1%; }
+form.login fieldset,
+form.password fieldset
+{ float: none; width: 90%; }
 
+form.login .button,
+form.password .button
+{ margin-top: 1%; }
 
+dd.forgot { font-size: 90%; margin-top: 1%; }
 
 /*
  * Feed Form
