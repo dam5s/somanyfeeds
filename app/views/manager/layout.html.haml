@@ -13,7 +13,7 @@
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-24449407-2']);
         _gaq.push(['_trackPageview']);
-  %body{class: @namespace || 'home'}
+  %body{class: @controller || 'home'}
     %header.main
       %hgroup.main
         %h1 So Many Feeds
@@ -41,7 +41,7 @@
           %ul#flash= flash_messages
     %section.main
       = yield
-    - package = @namespace ? "manager_#{@namespace}".to_sym : :jquery
+    - package = @controller ? "manager_#{@controller}".to_sym : :jquery
     - jammit :js, package, async: true
     :javascript
       (function() {

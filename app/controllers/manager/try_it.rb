@@ -6,7 +6,7 @@ module SoManyFeeds
     included do
 
       before '/try-it/*' do
-        @namespace = 'try_it'
+        @controller = 'try_it'
         @no_cache = true
 
         if logged_in?
