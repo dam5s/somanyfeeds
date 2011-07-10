@@ -5,8 +5,8 @@ module JammitHelper
   def fingerprint(type, package)
     path = File.join(RACK_ROOT, 'public/jam', "#{package}.#{type}")
 
-    if File.exist?(path)
-      Digest::MD5.hexdigest( File.read( path ) )
+    if File.exist? path
+      Digest::MD5.hexdigest(File.read path)
     else
       nil
     end
@@ -35,6 +35,16 @@ module JammitHelper
       haml_tag :script, src: path
     when :css
       haml_tag :link, rel: 'stylesheet', href: path
+    end
+  end
+
+  def manager_package
+    package = "#{@controller}_manager"
+
+    if Jammit.configuration[:javascripts].keys.include? package
+      package
+    else
+      :jquery
     end
   end
 

@@ -7,6 +7,8 @@ module User::PasswordReset
   included do
     field :reset_hash,            type: String
     field :reset_hash_created_at, type: Time
+
+    index :reset_hash, unique: true
   end
 
   def send_password_reset_email!
