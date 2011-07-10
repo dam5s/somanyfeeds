@@ -131,9 +131,8 @@ form {}
 /*
  * Login Form
  */
-fieldset.login { float: none; width: 90%; }
-input.login { margin-top: 1%; }
-
+form.login fieldset { float: none; width: 90%; }
+form.login .button { margin-top: 1%; }
 
 
 /*

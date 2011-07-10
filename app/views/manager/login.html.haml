@@ -1,6 +1,6 @@
-%form{action: '/login', method: 'POST'}
+%form.login{action: '/login', method: 'POST'}
 
-  %fieldset.login
+  %fieldset
     %dl
       %dt
         %label{for: 'login'} Username / Email
@@ -11,4 +11,4 @@
       %dd
         %input{type: 'password', name: 'password', id: 'password'}
 
-    %input{type: 'submit', value: 'login', class: 'login button'}
+    %input{type: 'submit', value: 'login', class: 'button'}
