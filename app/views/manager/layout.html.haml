@@ -6,10 +6,9 @@
     %meta{'http-equiv' => 'X-UA-Compatible', content: 'IE=edge,chrome=1'}
     - jammit :js, :head
     - jammit :css, :manager
+    - google_web_fonts
     - unless development?
-      %script{src: 'http://use.typekit.com/dtz1quu.js'}
       :javascript
-        try{Typekit.load();}catch(e){}
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-24449407-2']);
         _gaq.push(['_trackPageview']);

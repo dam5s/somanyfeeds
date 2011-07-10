@@ -7,10 +7,9 @@
     - rss_links
     - jammit :js, :head
     - jammit :css, :aggregator
+    - google_web_fonts
     - unless development?
-      %script{src: 'http://use.typekit.com/dtz1quu.js'}
       :javascript
-        try{Typekit.load();}catch(e){}
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-24448480-1']);
         _gaq.push(['_setDomainName', 'none']);

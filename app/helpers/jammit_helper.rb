@@ -38,4 +38,8 @@ module JammitHelper
     end
   end
 
+  def google_web_fonts
+    haml_tag :link, href: 'http://fonts.googleapis.com/css?family=Neuton&v1', rel: 'stylesheet', type: 'text/css'
+  end
+
 end
