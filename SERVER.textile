@@ -113,7 +113,7 @@ Host somanyfeeds-www
 Host somanyfeeds-admin
   Hostname     184.106.113.138
   Port         2022
-  User         reggie
+  User         damo
   HostKeyAlias somanyfeeds
   IdentityFile ~/.ssh/somanyfeeds-admin
 </pre>
