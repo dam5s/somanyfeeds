@@ -1,0 +1,375 @@
+h1. Install Debian 6 server on Rackspace
+
+h2. Install some defaults
+
+<pre>
+# apt-get install curl less git
+# update-alternatives --set pager /bin/less
+# update-alternatives --set editor /usr/bin/vim.tiny
+</pre>
+
+h2. Add default users
+
+You will be asked for passwords, and various optional informations
+
+<pre>
+# adduser damo
+# adduser www
+</pre>
+
+h2. Configure sudo and su
+
+<pre>
+# visudo
+</pre>
+
+Content of the file should be
+
+<pre>
+root    ALL=(ALL) ALL
+damo    ALL=(ALL) ALL
+%sudo   ALL=NOPASSWD: ALL
+</pre>
+
+Save, and exit, then do the following
+
+<pre>
+# addgroup wheel
+# usermod -a -G wheel root
+# usermod -a -G sudo damo
+# vi /etc/pam.d/su
+</pre>
+
+It should have the following line enabled:
+
+<pre>
+auth       required   pam_wheel.so group=wheel
+</pre>
+
+h2. Configure ssh
+
+"Reference":http://www.debian.org/doc/manuals/securing-debian-howto/ch-sec-services.en.html#s5.1
+
+<pre>
+# vi /etc/ssh/sshd_config
+</pre>
+
+Make sure it has the following configuration
+
+<pre>
+Port 7077
+PermitRootLogin no
+AllowUsers damo www
+PasswordAuthentication no
+AuthorizedKeysFile      %h/.ssh/authorized_keys
+</pre>
+
+h3. Add a password protected ssh key for damo user
+
+(on your local machine, assuming you have pbcopy, otherwise just copy manually)
+
+<pre>
+$ cd ~/.ssh
+$ ssh-keygen -f somanyfeeds-admin
+yourpassword<enter>
+yourpassword<enter>
+$ cat ~/.ssh/somanyfeeds-admin.pub | pbcopy
+</pre>
+
+(on remote machine)
+paste the public key in /home/damo/.ssh/authorized_keys
+
+h3. Add a basic ssh_key for www user
+
+(on your local machine, assuming you have pbcopy, otherwise just copy manually)
+
+<pre>
+$ cd ~/.ssh
+$ ssh-keygen -f somanyfeeds-www
+<enter>
+<enter>
+$ cat ~/.ssh/somanyfeeds-www.pub | pbcopy
+</pre>
+
+(on remote machine)
+paste the public key in /home/www/.ssh/authorized_keys
+
+h3. Local ssh configuration
+
+<pre>
+$ vi ~/.ssh/config
+</pre>
+
+Add the following to the file
+
+<pre>
+Host somanyfeeds-www
+  Hostname     184.106.113.138
+  Port         2022
+  User         www
+  HostKeyAlias somanyfeeds
+  IdentityFile ~/.ssh/somanyfeeds-www
+
+Host somanyfeeds-admin
+  Hostname     184.106.113.138
+  Port         2022
+  User         reggie
+  HostKeyAlias somanyfeeds
+  IdentityFile ~/.ssh/somanyfeeds-admin
+</pre>
+
+h3. Restart ssh
+
+Double check your config, because if you have broken it you won't be able to ssh back in.
+
+<pre>
+# /etc/init.d/ssh restart
+</pre>
+
+h2. Configure IPtables
+
+The goal is to have a whitelist of authorised services
+Just add the services you want: SSH, HTTP
+
+<pre>
+# iptables -A INPUT -p tcp --dport 2022 -j ACCEPT
+# iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+</pre>
+
+Make sure the rules are catching the traffic.
+Try and connect to each of those, then check the traffic with:
+
+<pre>
+# iptables -L -v
+</pre>
+
+If those rules suit you, you should now drop all other traffic.
+Really make sure it works well before doing that...
+or you won't be able to access your server, at all.
+
+<pre>
+# iptables -P INPUT DROP
+</pre>
+
+Now to save the configuration and automatically load it on startup:
+
+<pre>
+# iptables-save > /etc/iptables.rules
+</pre>
+
+Setup restoring script
+
+<pre>
+# cd /etc/network/if-pre-up.d
+# touch iptables
+# chown root:root iptables
+# chmod u+x iptables
+# vi iptables
+</pre>
+
+Add the following to the script
+
+<pre>
+#!/bin/sh
+/sbin/iptables-restore < /etc/iptables.rules
+</pre>
+
+You should be all set!
+
+h2. Install updates
+
+The following will set Debian to choose stable packages by default
+
+<pre>
+# echo "APT::Default-Release \"stable\";" > /etc/apt/apt.conf.d/10stable
+# vi /etc/apt/sources.list
+</pre>
+
+The following will allow us to have testing sources as well
+
+<pre>
+deb http://http.us.debian.org/debian/ squeeze main contrib non-free
+deb-src http://http.us.debian.org/debian/ squeeze main contrib non-free
+
+deb http://http.us.debian.org/debian/ wheezy main contrib non-free
+deb-src http://http.us.debian.org/debian/ wheezy main contrib non-free
+
+deb http://security.debian.org/ squeeze/updates main contrib
+deb-src http://security.debian.org/ squeeze/updates main contrib
+</pre>
+
+<pre>
+# apt-get update
+# apt-get upgrade
+</pre>
+
+If the server is not able to connect for apt-get update, you can temporarily open iptables during the installation process...
+I haven't found the exact rules to add for apt-get. Contact me if you have more info!
+
+<pre>
+# iptables -P INPUT ACCEPT
+</pre>
+
+h2. Install fail2ban
+
+<pre>
+# apt-get install fail2ban
+# /etc/init.d/fail2ban start
+</pre>
+
+h2. Install varnish HTTP accelerator
+
+To use the varnish-cache.org repository and install varnish, do the following:
+
+<pre>
+# curl http://repo.varnish-cache.org/debian/GPG-key.txt | apt-key add -
+# echo "deb http://repo.varnish-cache.org/debian/ squeeze varnish-3.0" >> /etc/apt/sources.list.d/varnish.list
+# apt-get update
+# apt-get install varnish
+</pre>
+
+Configure to listen on port 80 and redirect to port 8080 on page miss
+
+h2. Install Nginx
+
+<pre>
+# apt-get -t testing install nginx
+</pre>
+
+When you configure your server, make sure it listens on port 8080
+
+h2. Install rvm, and ruby 1.9.2
+
+SSH as damo
+
+<pre>
+damo@somanyfeeds$ sudo apt-get install build-essential bison libreadline6-dev git-core zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 autoconf ncurses-dev
+damo@somanyfeeds$ sudo apt-get install -t testing libxml2-dev libxslt-dev
+</pre>
+
+SSH as www
+
+<pre>
+www@somanyfeeds$ bash < <(curl -s https://rvm.beginrescueend.com/install/rvm) 
+www@somanyfeeds$ echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function' >> ~/.profile
+</pre>
+
+Logout and log back in
+
+<pre>
+www@somanyfeeds$ rvm install 1.9.2
+</pre>
+
+h2. Install MongoDB
+
+<pre>
+# apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+# echo "deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen" >> /etc/apt/sources.list.d/mongodb.list
+# apt-get install mongodb-10gen
+</pre>
+
+h2. Install RabbitMQ
+
+TODO
+
+h2. Install Monit
+
+<pre>
+# apt-get install monit
+</pre>
+
+Then add the various servers you want to monitor.
+The configurations below could probably be fine tuned to:
+
+ * check for memory usage
+ * check for cpu usage
+ * check the server actually responds
+ * ...
+
+h3. Varnish monit configuration
+
+Create file /etc/monit/conf.d/varnish
+
+<pre>
+check process varnish with pidfile /var/run/varnishd.pid
+  start program = "/etc/init.d/varnish start"
+  stop program  = "/etc/init.d/varnish stop"
+  group server
+</pre>
+
+h3. Nginx monit configuration
+
+Create file /etc/monit/conf.d/nginx
+
+<pre>
+check process nginx with pidfile /var/run/nginx.pid
+  start program = "/etc/init.d/nginx start"
+  stop program  = "/etc/init.d/nginx stop"
+  group server
+</pre>
+
+h3. MongoDB monit configuration
+
+Create file /etc/monit/conf.d/mongodb
+
+<pre>
+check process mysql with pidfile /var/run/mongodb.pid
+  start program = "/etc/init.d/mongodb start"
+  stop program  = "/etc/init.d/mongodb stop"
+  group server
+</pre>
+
+h3. RabbitMQ monit configuration
+
+TODO
+
+h3. Finish the configuration
+
+In /etc/default/monit set
+
+<pre>
+startup=1
+</pre>
+
+Then do the following
+
+<pre>
+# /etc/init.d/monit restart
+</pre>
+
+h2. Configuring servers to launch at startup
+
+<pre>
+# apt-get install rcconf
+# rcconf
+</pre>
+
+h2. Configuring log rotation
+
+Add the file /etc/logrotate.d/somanyfeeds
+Add a configuration for each log file, for example:
+
+<pre>
+/home/www/somanyfeeds.com/shared/log/nginx.access.log {
+        weekly
+        rotate 5
+        create 640 www www
+}
+/home/www/somanyfeeds.com/shared/log/unicorn.stdout.log {
+        weekly
+        rotate 5
+        create 640 www www
+}
+/home/www/somanyfeeds.com/shared/log/unicorn.stderr.log {
+        weekly
+        rotate 5
+        create 640 www www
+}
+</pre>
+
+h2. Ensure your default iptables policy is back to normal
+
+<pre>
+# iptables -P INPUT DROP
+# iptables-save > /etc/iptables.rules
+</pre>
