@@ -132,6 +132,8 @@ The goal is to have a whitelist of authorised services
 Just add the services you want: SSH, HTTP
 
 <pre>
+# iptables -A INPUT -i lo -j ACCEPT
+# iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 # iptables -A INPUT -p tcp --dport 2022 -j ACCEPT
 # iptables -A INPUT -p tcp --dport 80 -j ACCEPT
 </pre>
@@ -272,6 +274,13 @@ h2. Install RabbitMQ
 
 TODO
 
+h2. Install Memcached
+
+<pre>
+# apt-get install memcached
+</pre>
+
+
 h2. Install Monit
 
 <pre>
@@ -322,6 +331,17 @@ check process mysql with pidfile /var/run/mongodb.pid
 h3. RabbitMQ monit configuration
 
 TODO
+
+h3. Memcached monit configuration
+
+Create file /etc/monit/conf.d/memcached
+
+<pre>
+check process memcached with pidfile /var/run/memcached.pid
+  start program = "/etc/init.d/memcached start"
+  stop program  = "/etc/init.d/memcached stop"
+  group server
+</pre>
 
 h3. Finish the configuration
 
