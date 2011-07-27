@@ -39,7 +39,7 @@ module JammitHelper
   end
 
   def manager_package
-    package = "#{@controller}_manager"
+    package = "manager_#{@controller}".to_sym
 
     if Jammit.configuration[:javascripts].keys.include? package
       package
