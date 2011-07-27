@@ -1,15 +1,15 @@
 module ManagerHelper
 
   def git_msg c
-    c['commit']['message']
+    c['commit']['message'] rescue ""
   end
 
   def git_author c
-    c['author']['login']
+    c['author']['login'] rescue ""
   end
 
   def git_avatar c
-    c['author']['avatar_url']
+    c['author']['avatar_url'] rescue ""
   end
 
 end
