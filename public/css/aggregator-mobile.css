@@ -3,23 +3,15 @@
  * These follow after primary styles so they will successfully override. 
  */
 
-@media all and (orientation:portrait) { 
-  /* Style adjustments for portrait mode goes here */
-}
-
-@media all and (orientation:landscape) { 
-  /* Style adjustments for landscape mode goes here */
-}
-
 /* Grade-A Mobile Browsers (Opera Mobile, iPhone Safari, Android Chrome)  
    Consider this: www.cloudfour.com/css-media-query-for-mobile-is-fools-gold/ */
 @media screen and (max-device-width: 640px) {
   body           { font-size: 90%; }
   header.main    { position: static; }
-  header.main h1 { font-size: 300%; }
-  header.main h2 { font-size: 150%; }
+  header.main h1 { font-size: 3em; }
+  header.main h2 { font-size: 1.5em; }
   section.main   { padding-top: 1.5em; }
-  .article h1    { font-size: 150%; }
+  .article h1    { font-size: 1.5em; }
 
   .article header a:link,
   .article header a:active,

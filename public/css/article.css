@@ -8,7 +8,7 @@ article {
   }
     article h1 {
       text-align: left;
-      font-size: 180%;
+      font-size: 1.8em;
       margin: 0 2%;
     }
     article header a:link,
@@ -28,7 +28,7 @@ article {
       position: absolute;
       right: 15%;
       top: 20%;
-      font-size: 100%;
+      font-size: 1em;
       text-align: right;
       margin: 0 2%;
     }

@@ -16,10 +16,10 @@ header.main {
   }
     header.main h1, header.main h2 {
       padding: .1em 0;
-      font-size: 300%;
+      font-size: 3em;
       text-align: center;
     }
-    header.main h2 { font-size: 180%; padding: 0 0 .6em; }
+    header.main h2 { font-size: 1.8em; padding: 0 0 .6em; }
 
   header.main a:link, header.main a:visited { color: #444; }
   header.main a:active, header.main a:hover { color: #000; }

@@ -15,18 +15,15 @@ header.main {
   }
     hgroup.main h1, hgroup.main h2 {
       padding: .3em 0 0;
-      font-size: 300%;
-      text-align: center;
     }
       hgroup.main h2 {
-        font-size: 180%;
         padding: 0 0 .6em;
         color: #A8CB17;
       }
 
     hgroup.main h3 {
       color: #c33;
-      font-size: 170%;
+      font-size: 1.7em;
 
       display: block;
       position: absolute;
@@ -61,13 +58,13 @@ header.main {
 
     hgroup.page h1 {
       text-align: left;
-      font-size: 180%;
+      font-size: 1.8em;
       padding: .2em 1em;
       color: #fff;
     }
 
       ul#flash {
-        font-size: 60%;
+        font-size: .6em;
         font-family: "Trebuchet MS", sans-serif;
         padding: 0;
         margin: 0;
@@ -136,7 +133,7 @@ form.login .button,
 form.password .button
 { margin-top: 1%; }
 
-dd.forgot { font-size: 90%; margin-top: 1%; }
+dd.forgot { font-size: .9em; margin-top: 1%; }
 
 /*
  * Feed Form
@@ -186,7 +183,7 @@ section.feed form.delete input {
   padding: 2%;
   width: 96%;
 }
-.feed-name    { font-size: 120%; }
+.feed-name    { font-size: 1.2em; }
 .feed-info    { font-weight: 300; color: #999 }
 .feed-default { margin-left: .5% }
 
@@ -202,7 +199,7 @@ section.feed form.delete input {
     }
 
 #add-feed {
-  font-size: 400%;
+  font-size: 4em;
   font-weight: 900;
   height: 1.5em;
   width: 3%;
@@ -245,7 +242,7 @@ a.button, a.button:visited {
   cursor: pointer;
 
   padding: .3em .5em;
-  font-size: 120%;
+  font-size: 1.2em;
 }
   .button:hover, a.button:hover   { background-color: #A8CB17; }
   .button:active, a.button:active { top: 1px; }

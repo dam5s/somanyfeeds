@@ -9,7 +9,7 @@ body {
   font-family: "Trebuchet MS", sans-serif;
   color: #444;
   background-color: #fff;
-  font-size: 110%;
+  font-size: 100%;
 }
 ::-moz-selection{ background: #A8CB17; }
 ::selection { background:#A8CB17; }
@@ -26,8 +26,8 @@ a:hover {
     color: #A8CB17;
   }
 
-h1,h2 { font-size: 300%; text-align: center; }
-h2    { font-size: 180%; }
+h1,h2 { font-size: 3em; text-align: center; }
+h2    { font-size: 1.8em; }
 h1,h2,h3,.button { font-family: 'Neuton', serif; }
 
 
