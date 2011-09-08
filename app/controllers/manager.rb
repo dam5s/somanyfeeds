@@ -25,7 +25,12 @@ module SoManyFeeds
     get '/' do
 
       @title = 'Welcome'
-      @commits = JSON.parse open("https://api.github.com/repos/dam5s/somanyfeeds/commits").read
+      @commits =
+        if development?
+          []
+        else
+          JSON.parse open("https://api.github.com/repos/dam5s/somanyfeeds/commits").read
+        end
       respond :index
 
     end
