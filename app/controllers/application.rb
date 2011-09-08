@@ -162,7 +162,7 @@ module SoManyFeeds
       end
 
       def log_file
-        ( @@log_files ||= {} )[ to_var ] ||= File.open("log/#{to_var}.log", File::WRONLY | File::APPEND)
+        ( @@log_files ||= {} )[ to_var ] ||= File.open(RACK_ROOT+"/log/#{to_var}.log", File::WRONLY | File::APPEND)
       end
 
     end
