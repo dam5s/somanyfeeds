@@ -22,7 +22,7 @@ group :development, :test do
   gem 'machinist_mongo', '>= 1.1.1'
   gem 'forgery', '>= 0.3.6'
   gem 'capybara', '>= 1.0.0.beta1'
-  gem 'akephalos', :git => 'git://github.com/dam5s/akephalos.git'
+  gem 'selenium-client'
   gem 'autotest'
   gem 'ruby-debug19'
   gem 'awesome_print', :require => 'ap'

@@ -17,13 +17,12 @@ require File.expand_path('../../config/application', __FILE__)
 require 'rspec'
 require 'rack/test'
 require 'mongoid-rspec'
-require 'akephalos'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[ File.join(RACK_ROOT, 'spec/support/**/*.rb') ].each {|f| require f}
 
-Capybara.default_driver = :akephalos
+Capybara.default_driver = :selenium
 
 RSpec.configure do |config|
   config.mock_with :rspec

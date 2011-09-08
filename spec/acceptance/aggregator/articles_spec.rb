@@ -72,7 +72,7 @@ describe SoManyFeeds::Aggregator do
 
     page.should have_css('a', text: 'Github')
     page.should_not have_css('a.selected', text: 'Github')
-    #page.should have_css('article.github.hidden')
+    page.should have_css('article.github.hidden')
 
     page.should have_css('article.tumblr', count: 5)
     page.should have_css('a.selected', text: 'Tumblr')
@@ -88,11 +88,11 @@ describe SoManyFeeds::Aggregator do
 
     click_on 'Tumblr'
 
-    #page.should have_css('article.github.hidden', count: 5)
+    page.should have_css('article.github.hidden', count: 5)
     page.should have_css('a', text: 'Github')
     page.should_not have_css('a.selected', text: 'Github')
 
-    #page.should have_css('article.tumblr.hidden', count: 5)
+    page.should have_css('article.tumblr.hidden', count: 5)
     page.should have_css('a', text: 'Tumblr')
     page.should_not have_css('a.selected', text: 'Tumblr')
 
@@ -114,7 +114,7 @@ describe SoManyFeeds::Aggregator do
     page.should have_css('a.selected', text: 'Tumblr')
     page.should_not have_css('article.tumblr.hidden')
 
-    #page.should have_css('article.twitter.hidden', count: 5)
+    page.should_not have_css('article.twitter')
     page.should_not have_css('a.selected', text: 'Twitter')
     page.should have_css('a', text: 'Twitter')
 
