@@ -8,6 +8,7 @@ set :runner,        "www"
 
 set :server_addr, "184.106.113.138"
 ssh_options[:port] = 2022
+ssh_options[:keys] = [ File.join( ENV['HOME'], '.ssh/somanyfeeds' ) ]
 
 set :rack_env,    "production"
 set :user,        "www"
