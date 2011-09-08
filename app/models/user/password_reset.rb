@@ -13,7 +13,7 @@ module User::PasswordReset
 
   def send_password_reset_email!
     generate_password_reset_hash
-    ::Mailer.send_password_recovery self
+    ::Mailer.send_password_recovery( self )
   end
 
   module ClassMethods

@@ -12,8 +12,8 @@ gem 'rack-flash', '~> 0.1.1'
 gem 'nokogiri'
 gem 'amqp', '~> 0.7.1'
 gem 'bunny'
-gem 'god'
-gem 'mail', '~> 2.3.0'
+gem 'ruby-gmail', '~> 0.2.1'
+gem 'mime'
 
 group :development, :test do
   gem 'sinatra-reloader'
