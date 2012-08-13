@@ -21,6 +21,7 @@ module SoManyFeeds
     # GET /Flickr.rss
     # GET /Twitter+Delicious.html
     # GET /Twitter+Delicious.rss
+    # GET /Twitter+Delicious.json
     #
     get %r{/([^\./]+)?(\.html|\.rss|\.json|\.xhr)?} do |sources, format|
       find_user
@@ -48,7 +49,13 @@ module SoManyFeeds
       @articles = @articles.desc(:date)
 
       raise Sinatra::NotFound if @articles.blank?
-      respond :index
+
+      case @format
+      when :json
+        return @articles.to_json
+      else
+        respond :index
+      end
     end
 
     def find_user
