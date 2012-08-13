@@ -5,3 +5,6 @@ db_backups
 .DS_Store
 log/*
 config/mail.yml
+
+.bundle/
+.idea/
