@@ -59,15 +59,16 @@ module SoManyFeeds
 
         @package, @format = params['captures']
 
+        require 'ruby-debug'; debugger
         if file = serve_file_from_path("#{@package}.#{@format}", 'jam')
           return file
         end
 
         case @format.to_sym
         when :js
-          Jammit.packager.pack_javascripts(@package)
+          Jammit.packager.pack_javascripts(@package.to_sym)
         when :css
-          Jammit.packager.pack_stylesheets(@package, nil)
+          Jammit.packager.pack_stylesheets(@package.to_sym, nil)
         else
           raise Sinatra::NotFound
         end
@@ -126,13 +127,9 @@ module SoManyFeeds
       end
     end
 
-    def public_file_path(file, path)
-      path = File.join(RACK_ROOT, 'public', path)
-      File.expand_path( File.join(path, file) )
-    end
-
     def serve_file_from_path(file, path)
-      file_path = public_file_path(file, path)
+      path = File.join(RACK_ROOT, 'public', path)
+      file_path = File.expand_path( File.join(path, file) )
 
       if File.exist?(file_path) && File.dirname(file_path) == path
         return File.read(file_path)
