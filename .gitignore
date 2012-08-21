@@ -8,3 +8,4 @@ config/mail.yml
 
 .bundle/
 .idea/
+.powrc

@@ -1,7 +1,6 @@
 require 'parser'
 
 class User
-
   include Mongoid::Document
   include Mongoid::Timestamps
 
@@ -14,12 +13,6 @@ class User
 
   require 'user/authentication'
   include User::Authentication
-
-  require 'user/registration'
-  include User::Registration
-
-  require 'user/password_reset'
-  include User::PasswordReset
 
   attr_accessible :email,
     :username,
@@ -53,9 +46,4 @@ class User
   def self.update_all!
     all.each &:update!
   end
-
-  def self.clean_visitors!
-    where(registered: false, :updated_at.lt => 2.hours.ago).delete_all
-  end
-
 end

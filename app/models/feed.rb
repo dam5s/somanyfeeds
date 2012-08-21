@@ -33,15 +33,10 @@ class Feed
 
   def queue_job
     Daemons::Job.queue(self, priority: :medium) if first_url?
-    Daemons::Job.queue(self, priority: :high)   if trying_app?
   end
 
   def first_url?
-    self.user.registered? && self.url.present? && ( self.url_was.blank? || self.new_record? )
-  end
-
-  def trying_app?
-    self.user.visitor? && self.url.present?
+    self.url.present? && ( self.url_was.blank? || self.new_record? )
   end
 
   def name=(value)

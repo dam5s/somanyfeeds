@@ -50,7 +50,7 @@ module SoManyFeeds
       def require_login(return_to = request.path)
         @no_cache = true
 
-        unless logged_in? && user.registered?
+        unless logged_in?
           session[:return_to] = return_to if return_to
           redirect '/login'
         end

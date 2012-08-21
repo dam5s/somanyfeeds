@@ -12,7 +12,6 @@ gem 'rack-flash', '~> 0.1.1'
 gem 'nokogiri'
 gem 'amqp', '~> 0.7.1'
 gem 'bunny'
-gem 'ruby-gmail', '~> 0.2.1'
 gem 'mime'
 
 group :development, :test do

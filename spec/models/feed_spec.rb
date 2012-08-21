@@ -97,7 +97,7 @@ describe Feed do
 
   describe '#queue_job' do
 
-    before(:all) { @user = User.make; @user.password = nil; @user.password_confirmation = nil }
+    before(:all) { @user = User.make }
     after(:all) { @user.delete; Job.delete_all }
 
     context 'for a new record' do
@@ -108,7 +108,7 @@ describe Feed do
       end
 
       it 'should queue the feed on save' do
-        Daemons::Job.should_receive(:queue).with(@feed, priority: :high)
+        Daemons::Job.should_receive(:queue).with(@feed, priority: :medium)
         @user.feeds << @feed
       end
 
@@ -125,7 +125,7 @@ describe Feed do
       end
 
       it 'should queue the feed on save' do
-        Daemons::Job.should_receive(:queue).with(@feed, priority: :high)
+        Daemons::Job.should_receive(:queue).with(@feed, priority: :medium)
         @feed.save!
       end
 

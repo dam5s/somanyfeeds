@@ -11,8 +11,6 @@ module SoManyFeeds
     include Session
     include Feeds
     include Account
-    include TryIt
-    include Password
 
     helpers do
       include ApplicationHelper

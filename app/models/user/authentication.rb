@@ -15,12 +15,12 @@ module User::Authentication
 
     before_save :prepare_password
 
-    validates_uniqueness_of :username, :email, allow_blank: true, if: :registered?
+    validates_uniqueness_of :username, :email
     validates_format_of     :username, with: /^[-\w\._@]+$/i, allow_blank: true, message: "should only contain letters, numbers, or .-_@"
     validates_format_of     :email,    with: /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+([a-z0-9]{2,4}\.)?[a-z0-9]{2,4}$/i, allow_blank: true
 
-    validates_length_of :password, minimum: 4, allow_blank: true, if: :registered?
-    validate            :password_validation, if: :registered?
+    validates_length_of :password, minimum: 4
+    validate            :password_validation
 
     index :username, unique: true
     index :email, unique: true

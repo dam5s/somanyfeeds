@@ -28,15 +28,6 @@ User.blueprint do
   password_confirmation
 end
 
-User.blueprint(:registered) do
-  registered { true }
-end
-
-User.blueprint(:visitor) do
-  registered { false }
-  email { nil }
-end
-
 Feed.blueprint do
   name    { Sham.source }
   url     { Sham.link }

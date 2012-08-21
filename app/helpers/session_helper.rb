@@ -8,14 +8,6 @@ module SessionHelper
     session[:user_id].present?
   end
 
-  def visitor
-    @visitor ||= User.find(session[:visitor_id]) unless session[:visitor_id].blank?
-  end
-
-  def visiting?
-    session[:visitor_id].present?
-  end
-
   def flash_messages
     [:notice, :error].map do |type|
       if flash[type].present?

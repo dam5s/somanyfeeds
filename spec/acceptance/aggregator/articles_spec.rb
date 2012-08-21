@@ -2,7 +2,7 @@ require 'spec_helper'
 
 def create_user_for_acceptance
 
-  user = User.make_unsaved(:registered)
+  user = User.make_unsaved
 
   user.feeds << Feed::Twitter.make_unsaved(default: false)
   user.feeds << Feed::Github.make_unsaved
