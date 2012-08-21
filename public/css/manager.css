@@ -45,23 +45,6 @@ header.main {
       color: #fff;
     }
 
-      ul#flash {
-        font-size: .6em;
-        font-family: "Trebuchet MS", sans-serif;
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        display: inline-block;
-        width: 50%;
-        vertical-align: middle;
-      }
-        ul#flash li { color: #fff; }
-        ul#flash li:before { content: '- ' }
-        ul#flash li.notice { color: #A8CB17; }
-        ul#flash li.error { color: #CBA817; }
-
-
-
 /*
  * Forms Base
  */

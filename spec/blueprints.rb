@@ -6,7 +6,7 @@ Sham.link        { "http://#{Forgery::Internet.domain_name}/#{Forgery::Basic.tex
 Sham.description { Forgery::LoremIpsum.paragraph + Forgery::Basic.text }
 Sham.date        { Forgery::Date.date }
 Sham.entry_id    { Forgery::Basic.text }
-Sham.source      { %w(Twitter Delicious Flickr Blog Tumblr).random }
+Sham.source      { %w(Twitter Delicious Flickr Blog Tumblr).sample }
 
 Sham.username    { Forgery::Internet.user_name }
 Sham.email       { Forgery::Internet.email_address }

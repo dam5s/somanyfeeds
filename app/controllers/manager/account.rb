@@ -23,14 +23,10 @@ module SoManyFeeds
         attributes = params['user'][user.id.to_s]
         user.attributes = attributes
 
-        if user.save
-          flash[:notice] = 'Saved'
-        else
-          flash[:error] = 'There were errors saving'
-        end
+        user.save
 
         respond :my_account
-        
+
       end
 
     end # included

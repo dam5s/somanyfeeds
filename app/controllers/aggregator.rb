@@ -33,7 +33,7 @@ module SoManyFeeds
 
       @sources =
         if sources.present? && sources != 'index'
-          (sources.split(/\s+/).flatten & @user.all_sources).sort
+          (sources.split('+').flatten & @user.all_sources).sort
         elsif @user.all_sources.size <= 1
           @user.all_sources
         else

@@ -30,8 +30,9 @@ describe SoManyFeeds::Aggregator do
     User.delete_all
   end
 
-  it 'should display 2 default feeds' do
+  it 'should know which feeds to display' do
 
+    # Display default feeds
     visit '/'
 
     page.should have_css('article.github', count: 5)
@@ -46,10 +47,7 @@ describe SoManyFeeds::Aggregator do
     page.should_not have_css('a.selected', text: 'Twitter')
     page.should have_css('a', text: 'Twitter')
 
-  end
-
-  it 'should select one more feed' do
-
+    # Add Twitter
     click_on 'Twitter'
 
     page.should have_css('article.github', count: 5)
@@ -64,10 +62,7 @@ describe SoManyFeeds::Aggregator do
     page.should have_css('a.selected', text: 'Twitter')
     page.should_not have_css('article.twitter.hidden')
 
-  end
-
-  it 'should deselect one feed' do
-
+    # Remove Github
     click_on 'Github'
 
     page.should have_css('a', text: 'Github')
@@ -82,10 +77,7 @@ describe SoManyFeeds::Aggregator do
     page.should have_css('a.selected', text: 'Twitter')
     page.should_not have_css('article.twitter.hidden')
 
-  end
-
-  it 'should select only one feed' do
-
+    # Remove TUmblr, only twitter remains
     click_on 'Tumblr'
 
     page.should have_css('article.github.hidden', count: 5)
@@ -100,10 +92,7 @@ describe SoManyFeeds::Aggregator do
     page.should have_css('a.selected', text: 'Twitter')
     page.should_not have_css('article.twitter.hidden')
 
-  end
-
-  it 'should select back default feeds' do
-
+    # Remove last, restore default feeds
     click_on 'Twitter'
 
     page.should have_css('article.github', count: 5)

@@ -1,21 +1,29 @@
-defaults: &defaults
-  host: localhost
-  autocreate_indexes: false
-  allow_dynamic_fields: true
-  include_root_in_json: false
-  parameterize_keys: true
-  persist_in_safe_mode: false
-  raise_not_found_error: true
-  reconnect_time: 3
+default: &defaults
+  options:
+    allow_dynamic_fields: true
+    include_root_in_json: false
+    raise_not_found_error: true
 
 development:
   <<: *defaults
-  database: somanyfeeds_development
+  sessions:
+    default:
+      database: somanyfeeds_development
+      hosts:
+        - localhost:27017
 
 test:
   <<: *defaults
-  database: somanyfeeds_test
+  sessions:
+    default:
+      database: somanyfeeds_test
+      hosts:
+        - localhost:27017
 
 production:
   <<: *defaults
-  database: somanyfeeds_production
+  sessions:
+    default:
+      database: somanyfeeds_production
+      hosts:
+        - localhost:27017

@@ -111,7 +111,7 @@ describe User do
     end
 
     it 'should return nil if no feed found' do
-      subject.feed(BSON::ObjectId.new).should be_blank
+      subject.feed(Moped::BSON::ObjectId.new).should be_blank
     end
 
   end

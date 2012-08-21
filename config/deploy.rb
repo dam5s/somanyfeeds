@@ -21,7 +21,7 @@ set :branch,     "master"
 set :deploy_to,  "/home/www/somanyfeeds.com"
 set :deploy_via, :copy
 
-RVM_RUBY = 'ruby-1.9.2-p180'
+RVM_RUBY = 'ruby-1.9.3-p194-perf'
 RVM_PATH = '/home/www/.rvm'
 
 set :default_environment, {
@@ -34,11 +34,10 @@ set :default_environment, {
 
 before "deploy", "db:dump"
 
-# Task to run bundle install - per instructions from EngineYard
 namespace :bundler do
   desc "Automatically installed your bundled gems if a Gemfile exists"
   task :bundle_gems do
-    run "if [ -f #{release_path}/Gemfile ]; then cd #{release_path} && bundle install --path #{shared_path}/bundle --without test,development; fi"
+    run "cd #{release_path} && bundle install --path #{shared_path}/bundle --without test,development"
   end
 end
 

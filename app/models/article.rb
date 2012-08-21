@@ -12,7 +12,7 @@ class Article
 
   embedded_in :user
 
-  index :date
+  index( date: 1 )
 
   require 'article/json'
   include Article::JSON

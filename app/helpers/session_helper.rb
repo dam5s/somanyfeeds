@@ -8,14 +8,4 @@ module SessionHelper
     session[:user_id].present?
   end
 
-  def flash_messages
-    [:notice, :error].map do |type|
-      if flash[type].present?
-        haml "%li.#{type} #{flash[type]}"
-      else
-        ''
-      end
-    end.join
-  end
-
 end

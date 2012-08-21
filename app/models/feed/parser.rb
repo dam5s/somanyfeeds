@@ -14,12 +14,14 @@ module Feed::Parser
       end
     end
 
-    excess = self.articles.desc(:date).skip(10)
-    self.user.articles.delete_all conditions: { id: excess.map(&:id) }
+    if self.articles.count > 10
+      excess = self.articles.desc(:date).skip(10)
+      self.user.articles.delete_all(conditions: { id: excess.map(&:id) })
+    end
   end
 
   def parse
-    @xml = 
+    @xml =
       begin
         xml = open(url, 'r', read_timeout: 5.0)
         RSS::Parser.parse(xml)

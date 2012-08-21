@@ -1,16 +1,13 @@
+require 'database_cleaner'
 require File.expand_path(File.dirname(__FILE__) + '/../blueprints')
 
-def truncate_db
-  Mongoid.master.collections.select do |collection|
-    collection.name !~ /system/
-  end.each(&:drop)
-end
+DatabaseCleaner.strategy = :truncation
 
 RSpec.configure do |config|
   # == Truncate database after suite
   #
   config.before :suite do
-    truncate_db
+    DatabaseCleaner.clean
   end
 
   # == gem mongoid-rspec

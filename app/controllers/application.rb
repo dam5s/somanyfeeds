@@ -10,8 +10,8 @@ module SoManyFeeds
 
     included do
 
-      set :views,  File.join(RACK_ROOT, 'app/views', to_var)
-      set :public, File.join(RACK_ROOT, 'public') if development?
+      set :views, File.join(RACK_ROOT, 'app/views', to_var)
+      set :public_folder, File.join(RACK_ROOT, 'public') if development?
       set :haml, format: :html5
 
       use Rack::CommonLogger, log_file
@@ -108,37 +108,37 @@ module SoManyFeeds
 
     end
 
-    module InstanceMethods
+    def error_404
+      if html?
+        respond 404
+      else
+        'Oops we could not find what you are looking for!'
+      end
+    end
 
-      def error_404
-        if html?
-          respond 404
-        else
-          'Oops we could not find what you are looking for!'
-        end
+    def error_500
+      self.class.log_error(env, $!)
+
+      if html?
+        respond 500
+      else
+        'Oops there was an error processing your request!'
+      end
+    end
+
+    def public_file_path(file, path)
+      path = File.join(RACK_ROOT, 'public', path)
+      File.expand_path( File.join(path, file) )
+    end
+
+    def serve_file_from_path(file, path)
+      file_path = public_file_path(file, path)
+
+      if File.exist?(file_path) && File.dirname(file_path) == path
+        return File.read(file_path)
       end
 
-      def error_500
-        self.class.log_error(env, $!)
-
-        if html?
-          respond 500
-        else
-          'Oops there was an error processing your request!'
-        end
-      end
-
-      def serve_file_from_path(file, path)
-        path = File.join(RACK_ROOT, 'public', path)
-        file_path = File.expand_path( File.join(path, file) )
-
-        if File.exist?(file_path) && File.dirname(file_path) == path
-          return File.read(file_path)
-        end
-
-        return nil
-      end
-
+      return nil
     end
 
     module ClassMethods

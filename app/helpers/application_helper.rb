@@ -1,12 +1,4 @@
 module ApplicationHelper
-
-  def flash_js
-    if xhr?
-      @format = :js
-      return %Q|Manager.flash("notice", "#{flash[:notice]}", "#{@feed.id}");|
-    end
-  end
-
   #
   # Render a template without layout
   #

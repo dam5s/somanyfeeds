@@ -93,8 +93,6 @@ var Manager = ( function() {
         return false;
     };
 
-    $('#flash').delay(5000).fadeOut();
-
     $('section.feed form.update input').change( updateFeed );
     $('section.feed.existing form.delete input').click( deleteFeed );
     $('section.feed.new form.delete input').click( deleteNewFeed );
@@ -102,10 +100,6 @@ var Manager = ( function() {
     $('#add-feed').click( displayFeedTypes );
     $('#feed-types a').click( displayNewFeed );
 
-    return {
-      flash: function(type, flash, feed_id) {
-        $('#'+feed_id).fadeOut().fadeIn();
-      }
-    };
+    return {};
 
 }() );

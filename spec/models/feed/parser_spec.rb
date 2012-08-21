@@ -3,32 +3,20 @@ require 'spec_helper'
 #
 # Define valid feed entries here
 #
-module RSpec::Matchers
+RSpec::Matchers.define :be_valid_entries do
+  match do |entries|
+    entries.present? && entries.all? do |entry|
+      [:title, :link, :description, :entry_id].all? do |name|
+        entry.attributes[name].is_a?(String) &&
+          entry.attributes[name].present?
+      end &&
 
-  def be_valid_entries
-    Matcher.new :be_valid_entries do
-      match do |entries|
+      entry.attributes[:date].is_a?(Time) &&
 
-        entries.present? && entries.all? do |entry|
-
-          [:title, :link, :description, :entry_id].all? do |name|
-
-            entry.attributes[name].is_a?(String) &&
-              entry.attributes[name].present?
-
-          end &&
-
-          entry.attributes[:date].is_a?(Time) &&
-
-          entry.respond_to?(:save!)
-
-        end
-
-      end # match
-    end # Matcher.new
-  end # def be_valid_entries
-
-end # module
+      entry.respond_to?(:save!)
+    end
+  end # match
+end # def be_valid_entries
 
 describe Feed::Parser do
 

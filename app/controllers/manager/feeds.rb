@@ -33,14 +33,12 @@ module SoManyFeeds
           if @feed = user.feed(id)
             @feed.attributes = attr
             @feed.save!
-            feed_notice(@feed, 'updated')
 
             false
           else
             @feed = Feed.factory(type, attr)
             user.feeds << @feed
             user.save!
-            feed_notice(@feed, 'created')
 
             true
           end
@@ -61,7 +59,6 @@ module SoManyFeeds
 
         if feed = user.feed(params[:id])
           feed.destroy
-          feed_notice(feed, 'deleted')
         end
 
         redirect '/my-feeds'
@@ -77,14 +74,6 @@ module SoManyFeeds
       end
 
     end # included
-
-    module InstanceMethods
-
-      def feed_notice(feed, action)
-        flash.now[:notice] = %Q|Feed #{action}|
-      end
-
-    end
 
   end # Manager::Feeds
 end # SoManyFeeds

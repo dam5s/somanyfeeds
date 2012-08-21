@@ -22,47 +22,43 @@ module User::Authentication
     validates_length_of :password, minimum: 4
     validate            :password_validation
 
-    index :username, unique: true
-    index :email, unique: true
+    index({ username: 1 }, { unique: true })
+    index({ email: 1 }, { unique: true })
 
   end
 
-  module InstanceMethods
-
-    def password_validation
-      if new_record? || password_hash.blank?
-        errors.add(:password, 'should be present') if password.blank?
-      end
-
-      if password.present?
-        errors.add(:password_confirmation, 'does not match password') if password_confirmation != password
-      end
+  def password_validation
+    if new_record? || password_hash.blank?
+      errors.add(:password, 'should be present') if password.blank?
     end
 
-    def matching_password?(pass)
-      self.password_hash == encrypt_password(pass)
+    if password.present?
+      errors.add(:password_confirmation, 'does not match password') if password_confirmation != password
     end
+  end
 
-    def prepare_password
-      unless password.blank?
-        self.password_salt = Digest::SHA512.hexdigest([Time.now, rand].join)
-        self.password_hash = encrypt_password(password)
-      end
+  def matching_password?(pass)
+    self.password_hash == encrypt_password(pass)
+  end
+
+  def prepare_password
+    unless password.blank?
+      self.password_salt = Digest::SHA512.hexdigest([Time.now, rand].join)
+      self.password_hash = encrypt_password(password)
     end
+  end
 
-    def encrypt_password(pass)
-      digest = [pass, '--B4Z1NG4H--', password_salt].join
-      20.times { digest = Digest::SHA512.hexdigest(digest) }
-      digest
-    end
-
+  def encrypt_password(pass)
+    digest = [pass, '--B4Z1NG4H--', password_salt].join
+    20.times { digest = Digest::SHA512.hexdigest(digest) }
+    digest
   end
 
   module ClassMethods
 
     # Login can be either username or email address
     def authenticate(login, pass)
-      user = first(conditions: {username: login}) || first(conditions: {email: login})
+      user = where(username: login).first || where(email: login).first
       return user if user && user.matching_password?(pass)
     end
 
