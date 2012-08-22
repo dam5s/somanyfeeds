@@ -59,7 +59,6 @@ module SoManyFeeds
 
         @package, @format = params['captures']
 
-        require 'ruby-debug'; debugger
         if file = serve_file_from_path("#{@package}.#{@format}", 'jam')
           return file
         end
@@ -73,6 +72,17 @@ module SoManyFeeds
           raise Sinatra::NotFound
         end
 
+      end
+
+      get '/css/:stylesheet.css' do
+        @stylesheet = params[:stylesheet]
+        @format = :css
+
+        if file = serve_file_from_path("#{@stylesheet}.css", 'css')
+          return file
+        else
+          scss "../../assets/#{@stylesheet}".to_sym
+        end
       end
 
       #

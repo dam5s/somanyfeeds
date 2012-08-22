@@ -1,0 +1,351 @@
+/*
+ * Header layout
+ */
+
+header.main {
+  position: relative;
+  color: #fff;
+  width: 96%;
+  margin: 2%; }
+
+hgroup.main {
+  background-color: #2A4C66;
+  position: relative;
+  h1 {
+    padding: .3em 0 0; }
+  h2 {
+    padding: .3em 0 0;
+    padding: 0 0 .6em;
+    color: #A8CB17; } }
+
+header.main {
+  nav {
+    position: absolute;
+    top: .5em;
+    right: 1em;
+    text-align: right;
+    width: 96%; }
+  li {
+    display: inline-block;
+    margin: 0 0 0 1%; }
+  a {
+    &:link, &:visited {
+      color: #fff; }
+    &:hover {
+      color: #A8CB17; } } }
+
+hgroup.page {
+  background-color: #40627C;
+  border-top: 1px solid rgba(0, 0, 0, 0.25);
+  h1 {
+    text-align: left;
+    font-size: 1.8em;
+    padding: .2em 1em;
+    color: #fff; } }
+
+/*
+ * Forms Base
+ */
+
+section.feed ul {
+  padding: 0;
+  margin: 0;
+  list-style: none; }
+
+form {}
+
+input {
+  padding: 1%;
+  &:focus {
+    outline: none; }
+  &[type=text], &[type=password] {
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: -1px -1px 3px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: -1px -1px 3px rgba(0, 0, 0, 0.5);
+    box-shadow: -1px -1px 3px rgba(0, 0, 0, 0.5);
+    border: none; }
+  &[type=text]:hover, &[type=password]:hover {
+    background-color: #fff; }
+  &[type=text]:focus, &[type=password]:focus {
+    background-color: #ffc; } }
+
+fieldset, section.feed, #add-feed, #feed-types {
+  background-color: #eee;
+  margin: 0 0 2% 2%;
+  width: 24.8%;
+  padding: 2% 3%;
+  float: left;
+  display: block;
+  position: relative; }
+
+dt, dd {
+  padding: .2em 0; }
+
+label {
+  padding: .5em 0;
+  font-weight: 300;
+  color: #999;
+  display: inline-block; }
+
+/*
+ * Login and Password Reset Forms
+ */
+
+form {
+  &.login fieldset, &.password fieldset {
+    float: none;
+    width: 90%; }
+  &.login .button, &.password .button {
+    margin-top: 1%; } }
+
+dd.forgot {
+  font-size: .9em;
+  margin-top: 1%; }
+
+/*
+ * Feed Form
+ */
+
+section.feed {
+  input {
+    &[type=text], &[type=password] {
+      -moz-box-shadow: none;
+      -webkit-box-shadow: none;
+      box-shadow: none; } }
+  height: 6em; }
+
+#add-feed, #feed-types {
+  height: 6em; }
+
+section.feed input {
+  position: absolute;
+  top: .5em;
+  right: .5em;
+  padding: 0 .4em;
+  background-color: transparent;
+  color: #40627C;
+  border: none;
+  font-weight: 900;
+  text-shadow: 0 -1px 1px rgba(1, 1, 1, 0.8);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  &:hover {
+    color: #A8CB17; }
+  &:active {
+    color: #A8CB17;
+    top: .55em; } }
+
+.js {
+  section.feed.new, #feed-types {
+    display: none;
+    position: relative;
+    left: -25%; } }
+
+.feed-name, .feed-info {
+  border: 0;
+  cursor: pointer;
+  margin-left: -0.5%;
+  background-color: transparent;
+  padding: 2%;
+  width: 96%; }
+
+.feed-name {
+  font-size: 1.2em; }
+
+.feed-info {
+  font-weight: 300;
+  color: #999; }
+
+.feed-default {
+  margin-left: .5%; }
+
+#feed-types {
+  list-style-type: none;
+  li {
+    padding: 1% 2%;
+    float: left;
+    &#add-feed {
+      float: right; } } }
+
+#add-feed {
+  font-size: 4em;
+  font-weight: 900;
+  height: 1.5em;
+  width: 3%;
+  padding: 2%;
+  text-align: center;
+  vertical-align: bottom;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.8);
+  &:hover {
+    color: #A8CB17; }
+  &:active {
+    color: #A8CB17;
+    position: relative;
+    top: 1px; } }
+
+/*
+ * Account Form
+ */
+
+fieldset.account {
+  width: 41%; }
+
+input.save-account {
+  margin-left: 2%; }
+
+/*
+ * Buttons
+ */
+
+.button, a.button {
+  background: #97ba06 url(/img/alert-overlay.png) repeat-x;
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  position: relative;
+  cursor: pointer;
+  padding: .3em .5em;
+  font-size: 1.2em;
+  &:visited {
+    background: #97ba06 url(/img/alert-overlay.png) repeat-x;
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    position: relative;
+    cursor: pointer;
+    padding: .3em .5em;
+    font-size: 1.2em; } }
+
+.button:hover, a.button:hover {
+  background-color: #A8CB17; }
+
+.button:active, a.button:active {
+  top: 1px; }
+
+/*
+ * Home Page
+ */
+
+.home {
+  section {
+    &.about {
+      margin: 0 1% 0 2%; }
+    &.github {
+      margin: 0 2% 0 1%;
+      h2 {
+        color: #fff;
+        background-color: #326E9C;
+        padding: .5em; } } }
+  article, ol {
+    background-color: #eee;
+    padding: 1em 1%; } }
+
+article.closed {
+  background-color: #eee;
+  padding: 1em 1%; }
+
+.home {
+  ol {
+    list-style-type: none;
+    list-style-position: inside;
+    margin: 2% 0 0 0; }
+  .github {
+    li {
+      padding: .5em 1em; }
+    .avatar {
+      width: 30px;
+      height: 30px;
+      vertical-align: middle;
+      padding: 2px;
+      background-color: #fff; } }
+  section {
+    &.about, &.github {
+      width: 47%;
+      float: left; } }
+  article p {
+    padding: .5em 1em; } }
+
+article.closed p {
+  padding: .5em 1em; }
+
+.home a.button {
+  margin-top: 2%; }
+
+article.closed {
+  width: 94%;
+  margin: 0 2%; }
+
+a.closed {
+  margin: 2% 0 0 2%; }
+
+/*
+ * Try It Pages
+ */
+
+#steps {
+  width: 92%;
+  margin: 0 2%;
+  padding: 0 2%;
+  background-color: #eee;
+  li {
+    padding: .5em 1em;
+    display: inline-block;
+    width: 20%;
+    a {
+      display: block;
+      width: 100%;
+      height: 100%; }
+    &.current {
+      background-color: #40627C;
+      color: #fff; } } }
+
+.step {
+  margin: 2% 2% 0;
+  width: 96%;
+  dl {
+    padding: .5em 1em;
+    background-color: #eee; }
+  .button {
+    margin-top: 2%; } }
+
+.step-2 {
+  #feed-types {
+    display: block;
+    position: static;
+    margin-left: 0; }
+  section.feed.new {
+    position: static;
+    margin-left: 0; }
+  #add-feed {
+    display: none; }
+  .button {
+    display: none;
+    clear: both;
+    float: left;
+    margin-top: 0; } }
+
+.save .button {
+  clear: both;
+  float: left;
+  margin-top: 0; }
+
+.step-3 {
+  a.button {
+    margin-left: 0;
+    float: right; }
+  #articles {
+    margin-top: .5em; }
+  article {
+    display: none; } }
+
+.save fieldset {
+  margin-left: 0; }

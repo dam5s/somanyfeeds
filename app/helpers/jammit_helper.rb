@@ -13,8 +13,10 @@ module JammitHelper
   end
 
   def jammit(type, package, options = {})
-    paths = 
-      if development?
+    paths =
+      if development? && type == :css
+        Jammit.configuration[:stylesheets][package].map{|path| path.sub(/^public/, '')}
+      elsif development?
         Jammit.packager.individual_urls(package, type)
       else
         ["/jam/#{package}.#{type}/#{fingerprint(type, package)}"]

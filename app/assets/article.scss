@@ -1,0 +1,43 @@
+article {
+  padding-bottom: 2em;
+  header {
+    color: #fff;
+    position: relative; }
+  h1 {
+    text-align: left;
+    font-size: 1.8em;
+    margin: 0 2%; }
+  header a {
+    &:link, &:active, &:visited {
+      background-color: #326E9C;
+      width: 50%;
+      display: inline-block;
+      padding: .5em 35% .5em 15%;
+      color: #fff; }
+    &:hover {
+      background-color: #326E9C;
+      width: 50%;
+      display: inline-block;
+      padding: .5em 35% .5em 15%;
+      color: #fff;
+      background-color: #A8CB17; }
+    &:active {
+      background-color: #A8CB17; } }
+  h2 {
+    position: absolute;
+    right: 15%;
+    top: 20%;
+    font-size: 1em;
+    text-align: right;
+    margin: 0 2%;
+    time {
+      display: block; } }
+  section {
+    padding: 1em 2%;
+    margin: 0 13%;
+    background-color: #eee; }
+  p, ul, object {
+    margin-bottom: 1em; }
+  a.gist {
+    margin-bottom: 1em;
+    display: inline-block; } }
