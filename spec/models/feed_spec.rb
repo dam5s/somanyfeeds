@@ -98,7 +98,7 @@ describe Feed do
   describe '#queue_job' do
 
     before(:all) { @user = User.make }
-    after(:all) { @user.delete; Job.delete_all }
+    after(:all) { @user.delete }
 
     context 'for a new record' do
 
