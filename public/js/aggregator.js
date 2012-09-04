@@ -1,4 +1,17 @@
 var SoManyFeeds = ( function() {
+  //
+  // BEGIN -- Automatically downsize columns to the size of the window
+  var $sectionCols = $('section.main'),
+      $mainHeader = $('header.main'),
+      resizeCols = function() {
+        var windowHeight = $(window).height();
+
+        $sectionCols.css('height', windowHeight+'px');
+        $mainHeader.css('height', windowHeight+'px');
+      };
+  $(window).resize(resizeCols);
+  $(resizeCols);
+  // END -- Automatically downsize columns to the size of the window
 
   var defaultSources  = initSoManyFeeds[0],
       selectedSources = initSoManyFeeds[1],
@@ -60,7 +73,7 @@ var SoManyFeeds = ( function() {
     var source = link.attr('data-source');
     var articles = $( 'article.'+source.toLowerCase() );
 
-    $('#loading').show();
+    $('#loading').css('visibility', 'visible');
 
     if ( link.hasClass('selected') && selectedSources.length > 1 ) {
       selectedSources.splice( selectedSources.indexOf(source), 1 );
@@ -105,7 +118,7 @@ var SoManyFeeds = ( function() {
       if (selectedSources.length == 0)
         selectedSources = defaultSources.slice();
 
-      $('#loading').show();
+      $('#loading').css('visibility', 'visible');
       $('section.main').load( urlFromSources(selectedSources) + '.xhr' );
       updatePage(false);
 
@@ -116,7 +129,7 @@ var SoManyFeeds = ( function() {
 
     $('a.source').each( updateLink );
     updateRss();
-    $('#loading').hide();
+    $('#loading').css('visibility', 'hidden');
 
     if (pushHistory)
       try {

@@ -1,0 +1,51 @@
+@import "grid";
+@import "compass/css3";
+
+$column-height: 200em;
+
+$yellowish: #eaddb8 +#222;
+$darker_yellowish: $yellowish -#333;
+$light_brown: $yellowish -#666;
+$dark_brown: $yellowish -#999;
+$darker_brown: $yellowish -#ccc;
+
+$light: $yellowish +#222;
+$dark: #522;
+$green: #A8CB17;
+$yellow: #DBCB17;
+$red: #DB8817;
+
+$columns: 12;
+$column-width: 60;
+$gutter-width: 0;
+$total-width: 100%;
+
+$default-box-shadow-color: $dark;
+$default-text-shadow-color: $light_brown;
+$default-text-shadow-h-offset: 1px;
+$default-text-shadow-v-offset: 1px;
+$default-text-shadow-blur: 1px;
+
+@mixin sans-serif-font {
+  font-family: "Source Sans Pro", "Trebuchet MS", sans-serif;
+  font-weight: 200;
+}
+
+@mixin serif-font {
+  font-family: "Sorts Mill Goudy", "Georgia", serif;
+  font-weight: normal;
+}
+
+@mixin small-column {
+  height: $column-height;
+  overflow-y: auto;
+  @include column(6);
+  padding: 2em 3em;
+  @include box-sizing(border-box);
+}
+
+@mixin first-column {
+  background-color: $yellowish;
+  @include box-shadow($light_brown 0 0 1px);
+}
+

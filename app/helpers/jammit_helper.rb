@@ -1,7 +1,6 @@
 require 'digest/md5'
 
 module JammitHelper
-
   def fingerprint(type, package)
     path = File.join(RACK_ROOT, 'public/jam', "#{package}.#{type}")
 
@@ -40,18 +39,7 @@ module JammitHelper
     end
   end
 
-  def manager_package
-    package = "manager_#{@controller}".to_sym
-
-    if Jammit.configuration[:javascripts].keys.include? package
-      package
-    else
-      :jquery
-    end
-  end
-
   def google_web_fonts
-    haml_tag :link, href: 'http://fonts.googleapis.com/css?family=Neuton&v1', rel: 'stylesheet', type: 'text/css'
+    haml_tag :link, href: 'http://fonts.googleapis.com/css?family=Sorts+Mill+Goudy|Source+Sans+Pro', rel: 'stylesheet', type: 'text/css'
   end
-
 end

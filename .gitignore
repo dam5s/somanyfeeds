@@ -10,3 +10,4 @@ config/mail.yml
 .idea/
 .powrc
 .sass-cache/
+/tmp/

@@ -4,6 +4,7 @@
     %title= @title
     %meta{charset: 'utf-8'}
     %meta{'http-equiv' => 'X-UA-Compatible', content: 'IE=edge,chrome=1'}
+    %meta{name: 'viewport', content: 'width=device-width'}
     - rss_links
     - jammit :js, :head
     - jammit :css, :aggregator
@@ -15,23 +16,20 @@
         _gaq.push(['_setDomainName', 'none']);
         _gaq.push(['_setAllowLinker', true]);
         _gaq.push(['_trackPageview']);
-
     - if @user
       :javascript
         var initSoManyFeeds = [#{default_sources.to_json}, #{@sources.to_json}];
-
-    %meta{name: 'viewport', content: 'width=screen-width, initial-scale=1, maximum-scale=1'}
-
   %body
     %header.main
       %hgroup.main
         %h1= @title
       %nav.main
         = partial :main_menu if @user
+      %footer.main
+        powered by <a href="http://somanyfeeds.com">So Many Feeds</a>
     %section.main
       = yield
-    %footer
-      powered by <a href="http://somanyfeeds.com">So Many Feeds</a>
+
     - jammit :js, :aggregator, async: true
     :javascript
       (function() {

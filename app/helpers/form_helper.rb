@@ -50,6 +50,14 @@ module FormHelper
     )
   end
 
+  def select(object, attribute, options=[])
+    haml_tag :select, field_options(object, attribute) do
+      options.each do |opt|
+        haml_tag :option, opt, {value: opt}
+      end
+    end
+  end
+
   def label(object, attribute, content = attribute.to_s.titleize)
     haml_tag :label, for: field_name(object, attribute) do
       haml_concat content

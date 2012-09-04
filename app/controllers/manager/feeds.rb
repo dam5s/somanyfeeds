@@ -1,23 +1,19 @@
 module SoManyFeeds
   module Manager::Feeds
-
     extend ActiveSupport::Concern
 
     included do
-
       before '/*-feed*' do
         @controller = 'user'
       end
 
       get '/my-feeds' do
-
         require_login
+        @new_feed = Feed.default(params[:type])
         respond :my_feeds
-
       end
 
       post '/my-feeds/:id' do
-
         require_login
 
         id   = params[:id]
@@ -29,32 +25,23 @@ module SoManyFeeds
           default: params[:feed][id][:default].presence == 'yes'
         }
 
-        @created =
-          if @feed = user.feed(id)
-            @feed.attributes = attr
-            @feed.save!
+        if @feed = user.feed(id)
+          @feed.attributes = attr
+          @feed.save!
 
-            false
-          else
-            @feed = Feed.factory(type, attr)
-            user.feeds << @feed
-            user.save!
-
-            true
-          end
-
-        if xhr? && @created
-          respond :feed
-        elsif xhr?
-          flash_js
+          false
         else
-          redirect '/my-feeds'
+          @feed = Feed.factory(type, attr)
+          user.feeds << @feed
+          user.save!
+
+          true
         end
 
+        redirect '/my-feeds'
       end
 
       delete '/my-feeds/:id' do
-
         require_login
 
         if feed = user.feed(params[:id])
@@ -62,18 +49,7 @@ module SoManyFeeds
         end
 
         redirect '/my-feeds'
-
       end
-
-      get '/new-feed/:type' do
-
-        require_login
-        @feed = Feed.default(params[:type])
-        respond :new_feed
-
-      end
-
     end # included
-
   end # Manager::Feeds
 end # SoManyFeeds

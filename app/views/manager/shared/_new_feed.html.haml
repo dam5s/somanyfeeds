@@ -1,0 +1,23 @@
+%div{class: 'feed new', id: feed.id.to_s}
+  %form{method: 'POST', action: "/my-feeds/#{feed.id}", class: 'create'}
+    %dl
+      %dt
+        - label(feed, :_type, 'Type')
+      %dd
+        - select(feed, :_type, Feed::TYPES)
+      %dt
+        - label(feed, :name)
+      %dd
+        - text_field(feed, :name)
+      %dt
+        - label(feed, :info, 'Info (url or username)')
+      %dd
+        - text_field(feed, :info)
+      %dd.check_box
+        - check_box(feed, :default)
+      %dt.check_box
+        - label(feed, :default, 'display by default')
+
+    %input{type: 'submit', value: 'create', class: 'button'}
+
+

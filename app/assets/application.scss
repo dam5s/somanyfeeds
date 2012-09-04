@@ -1,98 +1,104 @@
-/*
- * COLORS
- * 2- Darker Blue : #2A4C66
- * 1- Dark Blue: #40627C
- * 3- Light Blue: #326E9C
- * 4- Green: #A8CB17
- */
+@import "constants";
+
+html {
+  overflow-y: hidden;
+}
 
 body {
-  font-family: "Trebuchet MS", sans-serif;
-  color: #444;
-  background-color: #fff;
-  font-size: 100%; }
+  @include sans-serif-font();
+  color: $dark;
+  background-color: $light;
+  font-size: .9em;
+  line-height: 1.5em;
+  overflow-x: hidden;
+}
 
 ::-moz-selection, ::selection {
-  background: #A8CB17; }
+  background: $green;
+}
 
 a {
   &:link, &:active, &:visited, &:hover {
-    color: #326E9C;
-    text-decoration: none; }
+    color: $light_brown;
+    text-decoration: none;
+  }
+
   &:active, &:hover {
-    color: #A8CB17; } }
+    color: $green;
+  }
+}
 
 h1 {
-  font-size: 3em;
-  text-align: center; }
+  font-size: 2em;
+  text-align: center;
+}
 
 h2 {
-  font-size: 3em;
   text-align: center;
-  font-size: 1.8em; }
+  font-size: 1.5em;
+}
 
 h1, h2, h3, .button {
-  font-family: 'Neuton', serif; }
+  @include serif-font();
+  line-height: 120%;
+}
 
-.rounded, fieldset, section.feed, .button, article a, section.feed input, #add-feed, #feed-types, #steps, .step-1 dl, .step-2 dl, .step-3 dl {
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px; }
+header.main {
+  width: 100%;
+  height: $column-height;
+  position: relative;
+  color: $light;
+  background-color: $darker_yellowish;
+  /*border-right: 2px solid $dark_brown;*/
+  overflow: hidden;
 
-.home {
-  article {
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px; }
-  section.github {
-    h2, ol {
-      -moz-border-radius: 10px;
-      -webkit-border-radius: 10px;
-      border-radius: 10px; } } }
+  @include column(3);
+  @include box-sizing(border-box);
+  @include box-shadow();
 
-article.closed, footer {
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px; }
+  hgroup {
+    padding: 2em;
+    background-color: $darker_brown;
 
-.rounded-top, hgroup.main {
-  -moz-border-radius: 10px 10px 0 0;
-  -webkit-border-radius: 10px 10px 0 0;
-  border-radius: 10px 10px 0 0; }
+    &.main { font-size: 120%; }
 
-.rounded-bottom, hgroup.page, nav.main {
-  -moz-border-radius: 0 0 10px 10px;
-  -webkit-border-radius: 0 0 10px 10px;
-  border-radius: 0 0 10px 10px; }
+    &.page {
+      padding: 1em 2em;
+      background-color: $light_brown;
 
-.shadow, fieldset {
-  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); }
+      h1, h2 { text-align: left; }
+    }
 
-hgroup {
-  &.main, &.page {
-    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); } }
+    h2 { color: $green; }
+  }
 
-section.feed, .button, nav.main, article a, section.feed input, #add-feed, #feed-types, #steps, .step-1 dl, .step-2 dl, .step-3 dl {
-  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); }
+  nav.main {
+    li a {
+      display: block;
+      padding: 1em 2em;
+      text-align: left;
+      color: $light;
 
-.home {
-  article {
-    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); }
-  section.github {
-    h2, ol {
-      -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-      -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); } } }
+      &:link, &:visited, &:hover { color: $light; }
+      &.current { background-color: $dark_brown; }
+      &:hover { background-color: $darker_brown; }
+    }
+  }
+}
 
-article.closed, footer {
-  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); }
+section.main {
+  @include column(9);
+  @include box-sizing(border-box);
+
+  h2 {
+    margin-bottom: 2em;
+  }
+
+  > section, > form {
+    @include small-column();
+
+    &:first-of-type {
+      @include first-column();
+    }
+  }
+}

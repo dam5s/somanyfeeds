@@ -20,25 +20,27 @@
           %h2 Welcome, #{user.to_label}
         - else
           %h2 A simple homepage
-      %nav
-        %ul
-          %li.home
-            %a{href: '/'} home
-          %li
-            %a{href: '/my-account'} my account
-          %li
-            %a{href: '/my-feeds'} my feeds
-          %li
-            %a{href: '/my-site'} my site
-          - if no_cache? && logged_in?
-            %li
-              %a{href: '/logout'} logout
       %hgroup.page
         %h1
           = @title
+      %nav.main
+        %ul
+          %li
+            - main_menu_link 'home', '/'
+          %li
+            - main_menu_link 'my account', '/my-account'
+          %li
+            - main_menu_link 'my feeds', '/my-feeds'
+          %li
+            - main_menu_link 'my site', '/my-site'
+          %li
+            - main_menu_link 'my profile', '/my-profile'
+          - if no_cache? && logged_in?
+            %li
+              - main_menu_link 'logout', '/logout'
     %section.main
       = yield
-    - jammit :js, manager_package, async: true
+    - jammit :js, :manager, async: true
     :javascript
       (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;

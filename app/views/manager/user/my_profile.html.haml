@@ -1,0 +1,20 @@
+%form{action: '/my-profile', method: 'POST'}
+  %fieldset
+    %h2 Change username or password
+    %dl
+      %dt
+        - label(user, :username)
+        = errors(user, :username)
+      %dd
+        - text_field(user, :username)
+      %dt
+        - label(user, :password)
+        = errors(user, :password)
+      %dd
+        - password_field(user, :password)
+      %dt
+        - label(user, :password_confirmation)
+        = errors(user, :password_confirmation)
+      %dd
+        - password_field(user, :password_confirmation)
+  %input{type: 'submit', value: 'save', class: 'save-account button'}

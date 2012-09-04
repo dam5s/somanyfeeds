@@ -1,2 +1,14 @@
-= partial :feed, collection: user.feeds
-= partial :feed_types
+- if user.feeds.size > 0
+  %section#my-feeds
+    %h2 Your feeds
+    = partial :feed, collection: user.feeds
+
+  %section#new-feed
+    %h2 Create a new feed
+    = partial :new_feed, locals: {feed: @new_feed}
+
+- else
+  %section#new-feed
+    %h2 Create a new feed
+    = partial :new_feed, locals: {feed: @new_feed}
+

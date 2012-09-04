@@ -19,7 +19,6 @@ module User::Authentication
     validates_format_of     :username, with: /^[-\w\._@]+$/i, allow_blank: true, message: "should only contain letters, numbers, or .-_@"
     validates_format_of     :email,    with: /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+([a-z0-9]{2,4}\.)?[a-z0-9]{2,4}$/i, allow_blank: true
 
-    validates_length_of :password, minimum: 4
     validate            :password_validation
 
     index({ username: 1 }, { unique: true })
@@ -33,7 +32,8 @@ module User::Authentication
     end
 
     if password.present?
-      errors.add(:password_confirmation, 'does not match password') if password_confirmation != password
+      errors.add(:password, 'is too short (minimum is 4 characters)') if password.length < 4
+      errors.add(:password_confirmation, 'does not match password')   if password_confirmation != password
     end
   end
 

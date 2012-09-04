@@ -1,7 +1,6 @@
 require 'daemons/job'
 
 class Feed
-
   TYPES = %w(Blog Tumblr Flickr Delicious Twitter Github)
 
   include Mongoid::Document
@@ -22,12 +21,10 @@ class Feed
 
   def update_articles
     if self.slug_was
-
       self.user.articles.where(source: self.slug_was).to_a.each do |a|
         a.source = self.slug
         a.save!
       end
-
     end
   end
 
@@ -69,7 +66,6 @@ class Feed
   end
 
   class << self
-
     def default(type = nil)
       class_from_type(type).default
     end
@@ -79,6 +75,7 @@ class Feed
     end
 
     private
+
     def class_from_type(type)
       begin
         type ||= 'Feed::Blog'
@@ -92,9 +89,7 @@ class Feed
         Feed::Blog
       end
     end
-
   end
-
 end
 
 Feed::TYPES.each { |type| require "feed/#{type.underscore}" }

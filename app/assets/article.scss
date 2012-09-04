@@ -1,43 +1,78 @@
+@import "constants";
+
 article {
-  padding-bottom: 2em;
+  padding-bottom: 1em;
+  padding-left: 1em;
+  @include column(6);
+  @include box-sizing(border-box);
+
+  &.hidden {
+    display: none;
+  }
+
   header {
-    color: #fff;
-    position: relative; }
+    color: $light;
+    position: relative;
+  }
+
   h1 {
     text-align: left;
-    font-size: 1.8em;
-    margin: 0 2%; }
+    font-size: 1.5em;
+  }
+
   header a {
     &:link, &:active, &:visited {
-      background-color: #326E9C;
-      width: 50%;
+      @include box-sizing(border-box);
+      border-left: .7em solid $darker_brown;
+      background-color: $dark_brown;
       display: inline-block;
-      padding: .5em 35% .5em 15%;
-      color: #fff; }
-    &:hover {
-      background-color: #326E9C;
-      width: 50%;
-      display: inline-block;
-      padding: .5em 35% .5em 15%;
+      padding: .5em 7em .5em 1em;
+      min-height: 2.8em;
+      width: 100%;
       color: #fff;
-      background-color: #A8CB17; }
+    }
+
+    &:hover {
+      background-color: $darker_brown;
+      border-color: $dark_brown;
+    }
+
     &:active {
-      background-color: #A8CB17; } }
+      background-color: $green;
+    }
+  }
+
   h2 {
     position: absolute;
-    right: 15%;
-    top: 20%;
+    right: 1em;
+    top: 1em;
     font-size: 1em;
     text-align: right;
     margin: 0 2%;
+
     time {
-      display: block; } }
+      display: block;
+    }
+  }
+
   section {
-    padding: 1em 2%;
-    margin: 0 13%;
-    background-color: #eee; }
-  p, ul, object {
-    margin-bottom: 1em; }
+    padding: 2em 3em;
+    background-color: $yellowish;
+    overflow: hidden;
+  }
+
+  p, li, object {
+    line-height: 1.5em;
+    margin-bottom: 1em;
+  }
+
+  em {
+    color: $dark_brown;
+    font-weight: 900;
+  }
+
   a.gist {
     margin-bottom: 1em;
-    display: inline-block; } }
+    display: inline-block;
+  }
+}

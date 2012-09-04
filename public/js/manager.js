@@ -1,105 +1,35 @@
-var Manager = ( function() {
+var Manager = (function() {
 
-    var updateFeed = function() {
-        var form = $(this).closest('form')
+  // BEGIN -- Automatically downsize columns to the size of the window
+  var $colsContainer = $('section.main'),
+      $sectionCols = $colsContainer.find('> section'),
+      $formCols = $colsContainer.find('> form'),
+      $mainHeader = $('header.main'),
+      resizeCols = function() {
+        var windowHeight = $(window).height();
 
-        $.ajax({
-            url: form.attr('action'),
-            data: form.serialize(),
-            type: form.attr('method'),
-            context: this,
-            success: function(data) {
-                if ( data.match(/<section/) ) {
-                    var section = $(this).closest('section');
-                    section.before(data);
-                    section.prev().find('form.update input').change(updateFeed);
-                    section.remove();
-                }
-            }
-        });
-    };
+        $sectionCols.css('height', windowHeight+'px');
+        $formCols.css('height', windowHeight+'px');
+        $mainHeader.css('height', windowHeight+'px');
+      };
+  $(window).resize(resizeCols);
+  $(resizeCols);
+  // END -- Automatically downsize columns to the size of the window
 
-    var deleteFeed = function() {
-        return confirm('Are you sure you want to delete this feed?');
-    };
+  // BEGIN -- Setup chosen
+  $('select').chosen();
+  // END -- Setup chosen
 
-    var displayFeedTypes = function() {
-        $('ul#feed-types')
-            .last()
-            .fadeTo(0, 0)
-            .show()
-            .animate({left: 0, opacity: 1}, 500);
+  // BEGIN -- Feeds list
+  $('dl.feed > dt', '#my-feeds').click(function() {
+    var $dd = $(this).closest('dl').find('>dd');
 
-        $(this).hide();
+    if ($dd.hasClass('expanded')) { $dd.removeClass('expanded'); }
+    else { setTimeout(function() {$dd.addClass('expanded')}, 400); }
 
-        return false;
-    }
+    $dd.slideToggle();
+  });
+  // END -- Feeds list
 
-    var displayNewFeed = function() {
-
-        $.ajax({
-            url: $(this).attr('href'),
-            context: $(this),
-            success: function(data) {
-                $('#add-feed').before(data);
-
-                var new_feed = $('section.feed.new').last();
-
-                $('#feed-types').hide();
-
-                $('#add-feed')
-                    .show()
-                    .animate({left: '-50%', opacity: 0}, 0)
-                    .animate({left: 0, opacity: 1}, 500);
-
-                new_feed
-                    .fadeTo(0, 0)
-                    .show()
-                    .animate({left: 0, opacity: 1}, 500);
-                new_feed
-                    .find('form.update input')
-                    .change(updateFeed);
-                new_feed
-                    .find('form.delete input')
-                    .last()
-                    .click(deleteNewFeed);
-
-            }
-        });
-
-        return false;
-
-    };
-
-    var deleteNewFeed = function() {
-        var section = $(this).closest('section');
-
-        section
-            .nextAll()
-            .animate({left: '+50%', opacity: 0}, 0)
-            .animate({left: 0, opacity: 1}, 500);
-
-        section
-            .animate({left: 0, opacity: 0}, 500);
-
-        if ( $('section.feed.new').length > 1 )
-            section
-                .animate({left: 0, opacity: 0}, 500)
-                .detach();
-        else
-            section
-                .animate({left: 0, opacity: 0}, 500);
-
-        return false;
-    };
-
-    $('section.feed form.update input').change( updateFeed );
-    $('section.feed.existing form.delete input').click( deleteFeed );
-    $('section.feed.new form.delete input').click( deleteNewFeed );
-
-    $('#add-feed').click( displayFeedTypes );
-    $('#feed-types a').click( displayNewFeed );
-
-    return {};
-
-}() );
+  return {};
+}());

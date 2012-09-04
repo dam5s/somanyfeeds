@@ -1,15 +1,25 @@
-%section{class: "feed #{feed.new_record? ? 'new' : 'existing'} #{feed_type_class feed}", id: feed.id.to_s}
-  %form{method: 'POST', action: "/my-feeds/#{feed.id}", class: 'delete'}
-    %input{type: 'hidden', name: '_method', value: 'delete'}
-    %input{type: 'submit', value: 'x'}
+%dl{class: 'feed persisted', id: feed.id.to_s}
+  %dt
+    %strong= feed.name
+    (#{feed._type.demodulize})
+  %dd
+    %form{method: 'POST', action: "/my-feeds/#{feed.id}", class: 'update'}
+      %dl
+        %dt
+          - label(feed, :name)
+        %dd
+          - text_field(feed, :name)
+        %dt
+          - label(feed, :info, 'Info (url or username)')
+        %dd
+          - text_field(feed, :info)
+        %dd.check_box
+          - check_box(feed, :default)
+        %dt.check_box
+          - label(feed, :default, 'display by default')
 
-  %form{method: 'POST', action: "/my-feeds/#{feed.id}", class: 'update'}
-    - hidden_field(feed, :_type)
-    %ul
-      %li
-        - text_field(feed, :name)
-      %li
-        - text_field(feed, :info)
-      %li
-        - check_box(feed, :default)
-        - label(feed, :default, 'on home page?')
+      %input{type: 'submit', value: 'update', class: 'button'}
+
+    %form{method: 'POST', action: "/my-feeds/#{feed.id}", class: 'delete'}
+      %input{type: 'hidden', name: '_method', value: 'delete update'}
+      %input{type: 'submit', value: '#', class: 'button delete'}
