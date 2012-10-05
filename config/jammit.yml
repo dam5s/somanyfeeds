@@ -6,6 +6,14 @@ javascripts:
     - public/js/head.js
   aggregator:
     - public/js/jquery-1.8.1.js
+    - public/js/underscore.js
+    - public/js/aggregator/article.js
+    - public/js/aggregator/feed.js
+    - public/js/aggregator/service.js
+    - public/js/aggregator/articles_view.js
+    - public/js/aggregator/menu_view.js
+    - public/js/aggregator/router.js
+    - public/js/aggregator/columns_resizer.js
     - public/js/aggregator.js
   manager:
     - public/js/jquery-1.8.1.js

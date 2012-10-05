@@ -56,7 +56,7 @@ module ApplicationHelper
   #
   def read_format(format)
     format ||= 'html'
-    format.gsub('.', '').gsub('xhr', 'html').to_sym
+    format.gsub('.', '').to_sym
   end
 
   def html?

@@ -23,14 +23,14 @@ module SoManyFeeds
     # GET /Twitter+Delicious.rss
     # GET /Twitter+Delicious.json
     #
-    get %r{/([^\./]+)?(\.html|\.rss|\.json|\.xhr)?} do |sources, format|
+    get %r{/([^\./]+)?(\.html|\.rss|\.json)?} do |sources, format|
       find_user
 
       @format  = read_format(format)
+
       #
       # Get Articles for sources
       #
-
       @sources =
         if sources.present? && sources != 'index'
           (sources.split('+').flatten & @user.all_sources).sort
@@ -40,15 +40,17 @@ module SoManyFeeds
           @user.default_sources
         end
 
-      @articles = @user.articles.any_in(source: @sources)
+      if @format != :html
+        @articles = @user.articles.any_in(source: @sources)
 
-      if s = (params[:s].presence.to_s.size > 3 && /#{params[:s]}/)
-        @articles = @articles.any_of( {title: s}, {description: s} )
+        if s = (params[:s].presence.to_s.size > 3 && /#{params[:s]}/)
+          @articles = @articles.any_of( {title: s}, {description: s} )
+        end
+
+        @articles = @articles.desc(:date)
+
+        raise Sinatra::NotFound if @articles.blank?
       end
-
-      @articles = @articles.desc(:date)
-
-      raise Sinatra::NotFound if @articles.blank?
 
       case @format
       when :json
