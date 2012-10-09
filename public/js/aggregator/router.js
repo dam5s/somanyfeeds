@@ -15,8 +15,18 @@ SMF.Router.prototype = {
     var path = _(document.location.href.split('/')).last();
     var slugs = path.split('+');
 
-    this.menuView = new SMF.MenuView(this.allFeeds);
+    this.menuView = new SMF.MenuView();
     this.menuView.initFeeds(slugs);
+
+    _(this.menuView.allFeeds).each(function(feed) {
+      feed.$link.click(function(e) {
+        e.preventDefault();
+        feed.isSelected = !feed.isSelected;
+
+        self.fetchArticlesForSelectedFeeds();
+        self.menuView.refreshLinks();
+      });
+    });
   },
 
   fetchArticlesForSelectedFeeds: function() {

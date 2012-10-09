@@ -1,16 +1,14 @@
 var SMF = SMF || {};
 
-SMF.MenuView = function(feeds) {
+SMF.MenuView = function() {
   this.$el = $('#feeds');
-  this.feeds = feeds;
-
-  this.allFeeds = [];
   this.$links = $('a', this.$el);
 };
 
 SMF.MenuView.prototype = {
   initFeeds: function(slugs) {
     var self = this;
+    this.allFeeds = [];
 
     this.$links.each(function() {
       var feed = new SMF.Feed($(this));
