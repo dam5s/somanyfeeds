@@ -15,23 +15,45 @@ SMF.Router.prototype = {
     var path = _(document.location.href.split('/')).last();
     var slugs = path.split('+');
 
-    this.menuView = new SMF.MenuView();
-    this.menuView.initFeeds(slugs);
+    this.feedsMenu = new SMF.FeedsMenu();
+    this.feedsMenu.initFeeds(slugs);
 
-    _(this.menuView.allFeeds).each(function(feed) {
+    _(this.feedsMenu.allFeeds).each(function(feed) {
       feed.$link.click(function(e) {
         e.preventDefault();
-        feed.isSelected = !feed.isSelected;
-
-        self.fetchArticlesForSelectedFeeds();
-        self.menuView.refreshLinks();
+        self.pushFeed(feed);
+        self.refreshFeeds();
       });
     });
+
+    window.onpopstate = function(event) {
+      self.popFeed(event);
+    };
+  },
+
+  refreshFeeds: function() {
+    this.fetchArticlesForSelectedFeeds();
+    this.feedsMenu.refreshLinks();
+  },
+
+  pushFeed: function(feed) {
+    feed.isSelected = !feed.isSelected;
+    history.pushState({}, document.title, feed.$link.attr('href'));
+  },
+
+  popFeed: function(event) {
+    if (event.state) {
+      var path = _(document.location.href.split('/')).last();
+      var slugs = path.split('+');
+
+      this.feedsMenu.selectFeedsWithSlugs(slugs)
+      this.refreshFeeds();
+    }
   },
 
   fetchArticlesForSelectedFeeds: function() {
     var self = this;
-    var feeds = this.menuView.selectedFeeds();
+    var feeds = this.feedsMenu.selectedFeeds();
 
     this.service.fetchArticlesForFeeds(feeds, function(articles) {
       self.articlesView.articles = articles;

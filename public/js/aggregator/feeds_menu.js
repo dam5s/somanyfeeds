@@ -1,11 +1,11 @@
 var SMF = SMF || {};
 
-SMF.MenuView = function() {
+SMF.FeedsMenu = function() {
   this.$el = $('#feeds');
   this.$links = $('a', this.$el);
 };
 
-SMF.MenuView.prototype = {
+SMF.FeedsMenu.prototype = {
   initFeeds: function(slugs) {
     var self = this;
     this.allFeeds = [];
@@ -20,9 +20,22 @@ SMF.MenuView.prototype = {
     this.refreshLinks();
   },
 
+  feedWithSlug: function(slug) {
+    return _(this.allFeeds).find(function(feed) {
+      return feed.slug == slug;
+    });
+  },
+
   selectedFeeds: function() {
     return _(this.allFeeds).filter(function(feed) {
       return feed.isSelected;
+    });
+  },
+
+  selectFeedsWithSlugs: function(slugs) {
+    _(this.allFeeds).each(function(feed) {
+      var isSelected = _(slugs).contains(feed.slug);
+      feed.isSelected = isSelected;
     });
   },
 

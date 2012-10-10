@@ -11,7 +11,7 @@ javascripts:
     - public/js/aggregator/feed.js
     - public/js/aggregator/service.js
     - public/js/aggregator/articles_view.js
-    - public/js/aggregator/menu_view.js
+    - public/js/aggregator/feeds_menu.js
     - public/js/aggregator/router.js
     - public/js/aggregator/columns_resizer.js
     - public/js/aggregator.js
