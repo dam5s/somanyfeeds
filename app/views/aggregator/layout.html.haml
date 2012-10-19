@@ -9,6 +9,8 @@
     - jammit :js, :head
     - jammit :css, :aggregator
     - google_web_fonts
+    :javascript
+      window.initialSlugs = #{@sources.to_json};
     - unless development?
       :javascript
         var _gaq = _gaq || [];

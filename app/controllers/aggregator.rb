@@ -26,7 +26,7 @@ module SoManyFeeds
     get %r{/([^\./]+)?(\.html|\.rss|\.json)?} do |sources, format|
       find_user
 
-      @format  = read_format(format)
+      @format = read_format(format)
 
       #
       # Get Articles for sources

@@ -1,19 +1,18 @@
 var SMF = SMF || {};
 
-SMF.Router = function() {
+SMF.Router = function(slugs) {
   this.service = new SMF.Service();
 
-  this.initializeFeedsAndMenu();
+  this.initializeFeedsAndMenu(slugs);
   this.articlesView = new SMF.ArticlesView();
 
   this.fetchArticlesForSelectedFeeds();
 };
 
 SMF.Router.prototype = {
-  initializeFeedsAndMenu: function() {
+  initializeFeedsAndMenu: function(slugs) {
     var self = this;
     var path = _(document.location.href.split('/')).last();
-    var slugs = path.split('+');
 
     this.feedsMenu = new SMF.FeedsMenu();
     this.feedsMenu.initFeeds(slugs);
