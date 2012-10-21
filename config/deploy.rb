@@ -25,7 +25,7 @@ RVM_RUBY = 'ruby-1.9.3-p194-perf'
 RVM_PATH = '/home/www/.rvm'
 
 set :default_environment, {
-          'PATH' => "#{RVM_PATH}/gems/#{RVM_RUBY}@somanyfeeds/bin:#{RVM_PATH}/gems/#{RVM_RUBY}@global/bin:#{RVM_PATH}/gems/#{RVM_RUBY}/bin:$PATH",
+          'PATH' => "#{RVM_PATH}/rubies/#{RVM_RUBY}/bin:#{RVM_PATH}/gems/#{RVM_RUBY}@somanyfeeds/bin:#{RVM_PATH}/gems/#{RVM_RUBY}@global/bin:#{RVM_PATH}/gems/#{RVM_RUBY}/bin:$PATH",
   'RUBY_VERSION' => RVM_RUBY,
       'GEM_HOME' => "#{RVM_PATH}/gems/#{RVM_RUBY}",
       'GEM_PATH' => "#{RVM_PATH}/gems/#{RVM_RUBY}@somanyfeeds:#{RVM_PATH}/gems/#{RVM_RUBY}@global:#{RVM_PATH}/gems/#{RVM_RUBY}",
@@ -56,14 +56,18 @@ before "worker:restart", "worker:stop", "worker:start"
 
 namespace :worker do
   task :start, :roles => :app do
-    run "cd #{current_path} && RACK_ENV=production rake worker:start >> #{shared_path}/log/worker.stdout.log 2>> #{shared_path}/log/worker.stderr.log &"
+    run "cd #{current_path} && RACK_ENV=production bundle exec rake worker:start >> #{shared_path}/log/worker.stdout.log 2>> #{shared_path}/log/worker.stderr.log &"
   end
 
   task :stop, :roles => :app do
-    run "cd #{current_path} && RACK_ENV=production rake worker:stop"
+    run "cd #{current_path} && RACK_ENV=production bundle exec rake worker:stop"
   end
 
   task :restart, :roles => :app do
+  end
+
+  task :execute, :roles => :app do
+    run "cd #{current_path} && RACK_ENV=production bundle exec rake worker:execute"
   end
 end
 
@@ -97,4 +101,4 @@ namespace :db do
   end
 end
 
-after "deploy:symlink", "deploy:config", "bundler:bundle_gems"
+after "deploy:create_symlink", "deploy:config", "bundler:bundle_gems"
