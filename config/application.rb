@@ -1,12 +1,17 @@
 require 'bundler'
 Bundler.require
 
-RACK_ENV  = ENV['RACK_ENV'] || 'development'
-RACK_ROOT = File.expand_path( File.join File.dirname(__FILE__), '..' )
+RACK_ENV ||= ENV['RACK_ENV'] || 'development'
+RACK_ROOT ||= File.expand_path( File.join File.dirname(__FILE__), '..' )
+
+$stdout.sync=true
+LOGGER = Logger.new($stdout)
+LOGGER.level = (RACK_ENV == 'production') ? Logger::WARN : Logger::DEBUG
 
 require 'sinatra/base'
 require 'active_support'
 require 'mongoid'
+require 'logger'
 
 $LOAD_PATH << RACK_ROOT
 $LOAD_PATH << File.join( RACK_ROOT, 'lib' )

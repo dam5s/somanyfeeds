@@ -24,6 +24,4 @@ production:
   <<: *defaults
   sessions:
     default:
-      database: somanyfeeds_production
-      hosts:
-        - localhost:27017
+      uri: <%= ENV['MONGOHQ_URL'] %>

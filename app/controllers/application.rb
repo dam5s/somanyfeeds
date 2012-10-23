@@ -2,19 +2,14 @@ require_files('app/models/*.rb')
 require_files('app/helpers/*.rb')
 
 module SoManyFeeds
-
   module Application
-
     extend ActiveSupport::Concern
     include ApplicationHelper
 
     included do
-
       set :views, File.join(RACK_ROOT, 'app/views', to_var)
       set :public_folder, File.join(RACK_ROOT, 'public') if development?
       set :haml, format: :html5
-
-      use Rack::CommonLogger, log_file
 
       mime_type :rss,  'application/rss+xml'
       mime_type :html, 'text/html'
@@ -56,7 +51,6 @@ module SoManyFeeds
       # GET /jam/modernizr.js
       #
       get %r{/jam/([^\./]+)\.(css|js)(.*)} do |package, format, fingerprint|
-
         @package, @format = params['captures']
 
         if file = serve_file_from_path("#{@package}.#{@format}", 'jam')
@@ -71,7 +65,6 @@ module SoManyFeeds
         else
           raise Sinatra::NotFound
         end
-
       end
 
       get '/css/:stylesheet.css' do
@@ -89,7 +82,6 @@ module SoManyFeeds
       # GET /img/loading.gif
       #
       get '/img/:image' do
-
         @image = params[:image]
         @format = @image.split('.').last.to_sym
 
@@ -98,12 +90,10 @@ module SoManyFeeds
         else
           raise Sinatra::NotFound
         end
-
       end
 
       get '/favicon.ico' do
       end
-
 
       error Jammit::PackageNotFound do
         error_404
@@ -116,7 +106,6 @@ module SoManyFeeds
       error do
         error_500
       end
-
     end
 
     def error_404
@@ -149,13 +138,13 @@ module SoManyFeeds
     end
 
     module ClassMethods
-
       def to_var
         to_s.downcase.split('::').last
       end
 
       def log_error env, ex
         req = Rack::Request.new(env)
+        req.params['password'] && req.params['password'] = '********'
 
         message  = "******************************\n"
         message << "#{req.request_method} #{req.fullpath}\n"
@@ -165,15 +154,8 @@ module SoManyFeeds
         message << ex.backtrace.map { |l| "\t#{l}" }.join("\n") << "\n"
         message << "******************************\n"
 
-        log_file.write message
+        LOGGER.error message
       end
-
-      def log_file
-        ( @@log_files ||= {} )[ to_var ] ||= File.open(RACK_ROOT+"/log/#{to_var}.log", File::WRONLY | File::APPEND)
-      end
-
     end
-
   end
-
 end
