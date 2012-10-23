@@ -13,14 +13,6 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     addressable (2.3.2)
-    amq-client (0.9.4)
-      amq-protocol (>= 0.9.4)
-      eventmachine
-    amq-protocol (0.9.4)
-    amqp (0.9.7)
-      amq-client (~> 0.9.4)
-      amq-protocol (>= 0.9.4)
-      eventmachine
     autotest (4.4.6)
       ZenTest (>= 4.4.1)
     awesome_print (1.0.2)
@@ -29,7 +21,6 @@ GEM
     bson_ext (1.6.4)
       bson (~> 1.6.4)
     builder (3.0.0)
-    bunny (0.8.0)
     capistrano (2.13.0)
       highline
       net-scp (>= 1.0.0)
@@ -155,11 +146,9 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport
-  amqp
   autotest
   awesome_print
   bson_ext
-  bunny
   capistrano
   capybara (>= 1.0.0.beta1)
   compass

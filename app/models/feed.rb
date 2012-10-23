@@ -1,5 +1,3 @@
-require 'daemons/job'
-
 class Feed
   TYPES = %w(Blog Tumblr Flickr Delicious Twitter Github)
 
@@ -17,7 +15,6 @@ class Feed
   attr_accessible :name, :info, :default
 
   before_save :update_articles
-  before_save :queue_job
 
   def update_articles
     if self.slug_was
@@ -26,10 +23,6 @@ class Feed
         a.save!
       end
     end
-  end
-
-  def queue_job
-    Daemons::Job.queue(self, priority: :medium) if first_url?
   end
 
   def first_url?

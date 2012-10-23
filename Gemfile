@@ -11,9 +11,8 @@ gem 'mongoid'
 gem 'bson_ext'
 gem 'jammit'
 gem 'nokogiri'
-gem 'amqp'
-gem 'bunny'
 gem 'mime'
+gem 'racksh'
 
 group :development, :test do
   gem 'sinatra-reloader'
@@ -28,6 +27,5 @@ group :development, :test do
   gem 'debugger'
   gem 'awesome_print', :require => 'ap'
   gem 'shotgun'
-  gem 'racksh'
   gem 'capistrano'
 end
