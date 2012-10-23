@@ -1,7 +1,6 @@
 source :rubygems
 
 gem 'rake'
-gem 'unicorn'
 gem 'activesupport'
 gem 'sinatra'
 gem 'haml'
