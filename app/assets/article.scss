@@ -56,23 +56,42 @@ article {
   }
 
   section {
-    padding: 2em 3em;
+    padding: 1em;
     background-color: $yellowish;
     overflow: hidden;
+
+    p, li, object, pre {
+      line-height: 1.5em;
+      margin-bottom: 1em;
+    }
+
+    code {
+      font-size: 95%;
+      font-family: 'Source Code Pro' Sans-Serif;
+    }
+
+    ul {
+      list-style-type: disc;
+    }
+
+    em {
+      color: $dark_brown;
+      font-weight: 900;
+    }
+
+    a.gist {
+      margin-bottom: 1em;
+      display: inline-block;
+    }
+
+    img, object {
+      max-width: 100%;
+    }
   }
 
-  p, li, object {
-    line-height: 1.5em;
-    margin-bottom: 1em;
-  }
-
-  em {
-    color: $dark_brown;
-    font-weight: 900;
-  }
-
-  a.gist {
-    margin-bottom: 1em;
-    display: inline-block;
+  &.flickr {
+    section {
+      text-align: center;
+    }
   }
 }

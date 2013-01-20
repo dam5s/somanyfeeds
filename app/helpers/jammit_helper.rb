@@ -40,6 +40,6 @@ module JammitHelper
   end
 
   def google_web_fonts
-    haml_tag :link, href: 'http://fonts.googleapis.com/css?family=Sorts+Mill+Goudy|Source+Sans+Pro', rel: 'stylesheet', type: 'text/css'
+    haml_tag :link, href: 'http://fonts.googleapis.com/css?family=Sorts+Mill+Goudy|Source+Sans+Pro|Source+Code+Pro', rel: 'stylesheet', type: 'text/css'
   end
 end
