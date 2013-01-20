@@ -1,6 +1,5 @@
 desc 'Jammit!'
 task :jammit do
-
   #
   # Compile scss files
   #
