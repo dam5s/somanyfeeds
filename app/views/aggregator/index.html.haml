@@ -1,11 +1,16 @@
 %script{type: 'text/html', id: 'article_tmpl'}
-  %article{class: '<%=type%>'}
-    %header
-      %h1
-        %a{href: '<%=link%>'} <%=title%>
-      %h2
-        Source: <%=feed_name%>
-        %time{datetime: '<%=datetime%>', pubdate: true} <%=display_date%>
-    %section <%=content%>
+  :plain
+    <article class="<%=type%>">
+      <header>
+        <h1>
+          <a href="<%=link%>"><%=title%></a>
+        </h1>
+        <h2>
+          Source: <%=feed_name%>
+          <time datetime="<%=datetime%>" pubdate><%=display_date%></time>
+        </h2>
+      </header>
+      <section><%=content%></section>
+    </article>
 
 #articles
