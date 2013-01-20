@@ -95,7 +95,6 @@ describe User do
     subject { User.make_unsaved }
 
     before(:all) do
-      Daemons::Job.stub!(:queue)
       subject.feeds = [Feed.make_unsaved]
       subject.save!
 

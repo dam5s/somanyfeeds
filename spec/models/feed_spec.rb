@@ -74,7 +74,6 @@ describe Feed do
     context 'with a clean name' do
 
       before do
-        Daemons::Job.stub!(:queue)
         @user.feeds << @feed = Feed.make(name: 'Blog')
         @feed.save!
       end
@@ -85,63 +84,10 @@ describe Feed do
     context 'with unsupported characters' do
 
       before do
-        Daemons::Job.stub!(:queue)
         @user.feeds << @feed = Feed.make(name: 'My Blog (in french)')
         @feed.save!
       end
       its(:slug) { should == 'My-Blog-in-french' }
-
-    end
-
-  end
-
-  describe '#queue_job' do
-
-    before(:all) { @user = User.make }
-    after(:all) { @user.delete }
-
-    context 'for a new record' do
-
-      before do
-        @feed = Feed.make_unsaved(url: 'foo')
-        @feed.should be_new_record
-      end
-
-      it 'should queue the feed on save' do
-        Daemons::Job.should_receive(:queue).with(@feed, priority: :medium)
-        @user.feeds << @feed
-      end
-
-    end
-
-    context 'for an existing feed with a first url' do
-
-      before do
-        @feed = Feed.make(url: nil, user: @user)
-        @feed.user.save!
-        @feed.should_not be_new_record
-
-        @feed.info = 'bar'
-      end
-
-      it 'should queue the feed on save' do
-        Daemons::Job.should_receive(:queue).with(@feed, priority: :medium)
-        @feed.save!
-      end
-
-    end
-
-    context 'without url' do
-
-      before do
-        @feed = Feed.make_unsaved
-        @feed.url = nil
-      end
-
-      it 'should not queue the feed on save' do
-        Daemons::Job.should_not_receive(:queue)
-        @user.feeds << @feed
-      end
 
     end
 
@@ -177,7 +123,6 @@ describe Feed do
     describe 'renaming source renames articles' do
 
       before(:all) do
-        Daemons::Job.stub!(:queue)
         @feed.name = 'Baz'
         @feed.save!
       end
