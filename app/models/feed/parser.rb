@@ -10,7 +10,8 @@ module Feed::Parser
         ntry.attributes = entry.attributes
         ntry.save!
       else
-        entry.save!(source: self.slug, user: self.user)
+        feed_type = self.class.to_s.demodulize.underscore
+        entry.save!(source: self.slug, user: self.user, feed_type: feed_type)
       end
     end
 

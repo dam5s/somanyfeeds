@@ -18,6 +18,7 @@ SMF.Service.prototype = {
         article.content = articleJSON.content;
         article.datetime = articleJSON.datetime;
         article.display_date = articleJSON.display_date;
+        article.feed_type = articleJSON.feed_type;
 
         return article;
       });

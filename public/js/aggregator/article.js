@@ -8,6 +8,7 @@ SMF.Article = function() {
   this.content = null;
   this.datetime = null;
   this.display_date = null;
+  this.feed_type = null;
 };
 
 SMF.Article.prototype = {

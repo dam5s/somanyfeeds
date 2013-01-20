@@ -16,7 +16,7 @@ module Article::JSON
   end
 
   def as_json( options = nil )
-    attributes = [ :id, :link, :title, :feed_name,
+    attributes = [ :id, :link, :title, :feed_name, :feed_type,
       :datetime, :display_date, :content, :source ]
 
     Hash.from_keys( attributes ) { |attr| send attr }

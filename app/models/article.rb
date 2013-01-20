@@ -9,6 +9,7 @@ class Article
   field :date,        type: DateTime
   field :entry_id,    type: String
   field :source,      type: String
+  field :feed_type,   type: String
 
   embedded_in :user
 
