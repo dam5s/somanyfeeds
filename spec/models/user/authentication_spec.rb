@@ -1,14 +1,12 @@
 require 'spec_helper'
 
 describe User::Authentication do
-
-  subject { User.make_unsaved }
+  subject { new_user }
 
   it { should validate_uniqueness_of(:email) }
   it { should validate_uniqueness_of(:username) }
 
   describe 'authenticate' do
-
     before do
       User.delete_all
       subject.save!
@@ -21,7 +19,5 @@ describe User::Authentication do
     it 'should find user by username/password' do
       User.authenticate(subject.username, subject.password).should == subject
     end
-
   end
-
 end

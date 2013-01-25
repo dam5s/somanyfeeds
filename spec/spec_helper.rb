@@ -6,13 +6,6 @@ Bundler.require
 require 'ruby-debug'
 require 'ap'
 
-# Require Machinist before any Mongoid Document is loaded
-# That is because Mongoid doesn't use inheritence, and including
-# a module in an already included module won't update
-# the existing mixin.
-#
-require 'machinist/mongoid'
-
 require File.expand_path('../../config/application', __FILE__)
 require 'rspec'
 require 'rack/test'
@@ -26,4 +19,5 @@ Capybara.default_driver = :selenium
 
 RSpec.configure do |config|
   config.mock_with :rspec
+  config.include ObjectCreationMethods
 end

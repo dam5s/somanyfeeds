@@ -1,8 +1,7 @@
 require 'spec_helper'
 
 describe User do
-
-  subject { User.make }
+  subject { create_user }
 
   before(:all) do
     User.delete_all
@@ -14,16 +13,12 @@ describe User do
 
   after(:all) { User.delete_all }
 
-
   describe 'Persistence' do
-
     it { should be_valid }
     it { should embed_many(:feeds) }
-
   end
 
   describe '#to_label' do
-
     before(:all) do
       subject.name = 'Foo'
       subject.username = 'Bar'
@@ -43,11 +38,9 @@ describe User do
       before { subject.name = nil; subject.username = nil }
       its(:to_label) { should == 'foo@bar.baz' }
     end
-
   end
 
   describe '#default_sources and #all_sources' do
-
     it "should be a list of feed slugs" do
       (subject.default_sources + subject.all_sources).each do |src|
         src.should =~ /^Some-Feed-[0-4]$/
@@ -65,37 +58,31 @@ describe User do
       subject.default_sources.size.should == 4
       subject.all_sources.size.should == 5
     end
-
   end
 
   describe '#update!' do
-
     it "should call update on each feed" do
       subject.feeds.each{|f| f.should_receive(:update!)}
       subject.update!
     end
 
     context "with a deleted feed" do
-
       before do
-        3.times { Article.make user: subject, source: 'Foo' }
+        3.times { new_article user: subject, source: 'Foo' }
         subject.articles.size.should == 3
         subject.update!
         subject.reload
       end
 
       its(:articles) { should be_empty }
-
     end
-
   end
 
   describe '#feed' do
-
-    subject { User.make_unsaved }
+    subject { new_user }
 
     before(:all) do
-      subject.feeds = [Feed.make_unsaved]
+      subject.feeds = [new_feed]
       subject.save!
 
       @id = subject.feeds.last.id
@@ -112,7 +99,5 @@ describe User do
     it 'should return nil if no feed found' do
       subject.feed(Moped::BSON::ObjectId.new).should be_blank
     end
-
   end
-
 end
