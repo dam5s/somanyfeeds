@@ -1,17 +1,18 @@
 require 'spec_helper'
 
 describe User do
-  subject { create_user }
+  subject { @user }
 
-  before(:all) do
+  before do
     User.delete_all
+    @user = create_user
 
      (0..4).each do |num|
-       subject.feeds << Feed.new(name: "Some Feed #{num}", default: true)
+       @user.feeds << Feed.new(name: "Some Feed #{num}", default: true)
     end
   end
 
-  after(:all) { User.delete_all }
+  after { User.delete_all }
 
   describe 'Persistence' do
     it { should be_valid }
@@ -19,10 +20,10 @@ describe User do
   end
 
   describe '#to_label' do
-    before(:all) do
-      subject.name = 'Foo'
-      subject.username = 'Bar'
-      subject.email = 'foo@bar.baz'
+    before do
+      @user.name = 'Foo'
+      @user.username = 'Bar'
+      @user.email = 'foo@bar.baz'
     end
 
     context 'with name' do
@@ -30,48 +31,48 @@ describe User do
     end
 
     context 'without name' do
-      before { subject.name = nil }
+      before { @user.name = nil }
       its(:to_label) { should == 'Bar' }
     end
 
     context 'without name, without username' do
-      before { subject.name = nil; subject.username = nil }
+      before { @user.name = nil; @user.username = nil }
       its(:to_label) { should == 'foo@bar.baz' }
     end
   end
 
   describe '#default_sources and #all_sources' do
     it "should be a list of feed slugs" do
-      (subject.default_sources + subject.all_sources).each do |src|
+      (@user.default_sources + @user.all_sources).each do |src|
         src.should =~ /^Some-Feed-[0-4]$/
       end
     end
 
     it "#default_sources should only include feeds with the default flag" do
-      subject.default_sources.size.should == 5
-      subject.all_sources.size.should == 5
+      @user.default_sources.size.should == 5
+      @user.all_sources.size.should == 5
 
-      feed = subject.feeds.last
+      feed = @user.feeds.last
       feed.default = false
       feed.save
 
-      subject.default_sources.size.should == 4
-      subject.all_sources.size.should == 5
+      @user.default_sources.size.should == 4
+      @user.all_sources.size.should == 5
     end
   end
 
   describe '#update!' do
     it "should call update on each feed" do
-      subject.feeds.each{|f| f.should_receive(:update!)}
-      subject.update!
+      @user.feeds.each{|f| f.should_receive(:update!)}
+      @user.update!
     end
 
     context "with a deleted feed" do
       before do
-        3.times { new_article user: subject, source: 'Foo' }
-        subject.articles.size.should == 3
-        subject.update!
-        subject.reload
+        3.times { new_article user: @user, source: 'Foo' }
+        @user.articles.size.should == 3
+        @user.update!
+        @user.reload
       end
 
       its(:articles) { should be_empty }
@@ -79,25 +80,24 @@ describe User do
   end
 
   describe '#feed' do
-    subject { new_user }
+    before do
+      @user = new_user
+      @user.feeds = [new_feed]
+      @user.save!
 
-    before(:all) do
-      subject.feeds = [new_feed]
-      subject.save!
-
-      @id = subject.feeds.last.id
+      @id = @user.feeds.last.id
     end
 
-    after(:all) do
-      subject.destroy
+    after do
+      @user.destroy
     end
 
     it 'should find a user feed with corresponding id' do
-      subject.feed(@id).should be_present
+      @user.feed(@id).should be_present
     end
 
     it 'should return nil if no feed found' do
-      subject.feed(Moped::BSON::ObjectId.new).should be_blank
+      @user.feed(Moped::BSON::ObjectId.new).should be_blank
     end
   end
 end

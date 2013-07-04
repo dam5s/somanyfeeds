@@ -15,8 +15,6 @@ require 'mongoid-rspec'
 # in spec/support/ and its subdirectories.
 Dir[ File.join(RACK_ROOT, 'spec/support/**/*.rb') ].each {|f| require f}
 
-Capybara.default_driver = :selenium
-
 RSpec.configure do |config|
   config.mock_with :rspec
   config.include ObjectCreationMethods

@@ -27,7 +27,7 @@ module Feed::Parser
         xml = open(url, 'r', read_timeout: 5.0)
         RSS::Parser.parse(xml)
       rescue Exception => e
-        return if test?
+        return if RACK_ENV == 'test'
 
         $stderr.puts "**************************************************"
         $stderr.puts "There was an error fetching the feed #{name}, for #{user.try(:to_label) || 'no user'}"
