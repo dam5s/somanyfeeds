@@ -8,9 +8,11 @@ development:
   <<: *defaults
   sessions:
     default:
-      database: somanyfeeds_development
+      database: somanyfeeds_dev
+      username: somanyfeeds_db
+      password: yS2$zkL6LC!q
       hosts:
-        - localhost:27017
+        - ds035428.mongolab.com:35428
 
 test:
   <<: *defaults

@@ -13,15 +13,15 @@ module JammitHelper
 
   def jammit(type, package, options = {})
     paths =
-      if development? && type == :css
+      if RACK_ENV == 'development' && type == :css
         Jammit.configuration[:stylesheets][package].map{|path| path.sub(/^public/, '')}
-      elsif development?
+      elsif RACK_ENV == 'development'
         Jammit.packager.individual_urls(package, type)
       else
         ["/jam/#{package}.#{type}/#{fingerprint(type, package)}"]
       end
 
-    if options[:async] && production?
+    if options[:async] && RACK_ENV == 'production'
       haml_tag :script do
         haml_concat "head.js(#{paths.map{|p|"'#{p}'"}.join ','});"
       end

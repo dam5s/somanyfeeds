@@ -7,6 +7,7 @@ javascripts:
   aggregator:
     - public/js/jquery-1.8.1.js
     - public/js/underscore.js
+    - public/js/masonry.js
     - public/js/aggregator/article.js
     - public/js/aggregator/feed.js
     - public/js/aggregator/service.js

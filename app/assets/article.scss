@@ -3,8 +3,21 @@
 article {
   padding-bottom: 1em;
   padding-left: 1em;
-  @include column(6);
+  width: 50%;
   @include box-sizing(border-box);
+  opacity: 0;
+  
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+      -ms-transition-duration: 0.8s;
+       -o-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+
+  -webkit-transition-property: opacity;
+     -moz-transition-property: opacity;
+      -ms-transition-property: opacity;
+       -o-transition-property: opacity;
+          transition-property: opacity;
 
   &.hidden {
     display: none;
@@ -63,6 +76,14 @@ article {
     p, li, object, pre {
       line-height: 1.5em;
       margin-bottom: 1em;
+    }
+
+    pre {
+      word-wrap: nowrap;
+      white-space: pre;
+      background-color: $darker_brown;
+      color: #fff;
+      overflow-x: auto;
     }
 
     code {

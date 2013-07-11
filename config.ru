@@ -35,9 +35,9 @@ module Rack
   end
 end
 
-map 'http://(www\.)?somanyfeeds.*/' do
-  run SoManyFeeds::Manager
-end
+#map 'http://(www\.)?somanyfeeds.*/' do
+#  run SoManyFeeds::Manager
+#end
 
 map '*' do
   run SoManyFeeds::Aggregator
