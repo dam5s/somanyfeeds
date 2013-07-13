@@ -4,7 +4,7 @@ db_backups
 .rake_tasks
 .DS_Store
 log/*
-config/mail.yml
+config/mongoid.yml
 
 .bundle/
 .idea/

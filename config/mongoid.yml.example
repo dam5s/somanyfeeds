@@ -8,7 +8,7 @@ development:
   <<: *defaults
   sessions:
     default:
-      database: somanyfeeds_development
+      database: somanyfeeds_dev
       hosts:
         - localhost:27017
 

@@ -24,7 +24,7 @@ module SoManyFeeds
 
       @title = 'Welcome'
       @commits =
-        if development?
+        if RACK_ENV == 'development'
           [
             {
               "author" => {

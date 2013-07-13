@@ -11,7 +11,7 @@
     - google_web_fonts
     :javascript
       window.initialSlugs = #{@sources.to_json};
-    - unless development?
+    - unless RACK_ENV == 'development'
       :javascript
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-24448480-1']);
@@ -30,7 +30,7 @@
       = yield
 
     - jammit :js, :aggregator, async: true
-    - unless development?
+    - unless RACK_ENV == 'development'
       :javascript
         (function() {
           var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;

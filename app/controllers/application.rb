@@ -8,7 +8,7 @@ module SoManyFeeds
 
     included do
       set :views, File.join(RACK_ROOT, 'app/views', to_var)
-      set :public_folder, File.join(RACK_ROOT, 'public') if development?
+      set :public_folder, File.join(RACK_ROOT, 'public') if RACK_ENV == 'development'
       set :haml, format: :html5
 
       mime_type :rss,  'application/rss+xml'

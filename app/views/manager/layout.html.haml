@@ -7,7 +7,7 @@
     - jammit :js, :head
     - jammit :css, :manager
     - google_web_fonts
-    - unless development?
+    - unless RACK_ENV == 'development'
       :javascript
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-24449407-2']);
@@ -41,7 +41,7 @@
     %section.main
       = yield
     - jammit :js, :manager, async: true
-    - unless development?
+    - unless RACK_ENV == 'development'
       :javascript
         (function() {
           var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;

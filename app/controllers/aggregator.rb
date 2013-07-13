@@ -63,7 +63,7 @@ module SoManyFeeds
     def find_user
       server_name = env['SERVER_NAME']
 
-      unless production?
+      unless RACK_ENV == 'production'
         server_name.sub! '.dev',   '.com'
         server_name.sub! '.local', '.com'
       end
