@@ -3,7 +3,7 @@
 article {
   padding-bottom: 1em;
   padding-left: 1em;
-  @include column(6);
+  width: 50%;
   @include box-sizing(border-box);
 
   &.hidden {
@@ -63,6 +63,14 @@ article {
     p, li, object, pre {
       line-height: 1.5em;
       margin-bottom: 1em;
+    }
+
+    pre {
+      word-wrap: nowrap;
+      white-space: pre;
+      background-color: $darker_brown;
+      color: #fff;
+      overflow-x: auto;
     }
 
     code {
